@@ -47,7 +47,6 @@ public class CommonUtils {
 		out.flush();
 		out.close();
 	}
-
 	public static void setSessionMap(Integer integer, String tokenCode) {
 		Map<String, Object> sessionMap = new HashMap<String, Object>();
 		sessionMap.put("userid", integer);

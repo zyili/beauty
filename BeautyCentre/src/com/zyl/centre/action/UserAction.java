@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.zyl.centre.common.utils.CommonUtils;
@@ -100,25 +101,26 @@ public class UserAction extends ActionSupport {
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 	}
 
-	public void userRegiste() throws IOException {
-		Map<String, Object> reMap = new HashMap<String, Object>();
+	public void userRegiste() throws IOException {	
+		JSONObject reJson = new JSONObject();
 		if (user == null || user.getUsername() == null
 				|| user.getPassword() == null || user.getType() == null) {
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
+			reJson.put("ResultMessage", CommonUtils.PARAMERROR);
 		} else {
 			String tokenCode = getTokenCode();
 			userservice.createUser(user, tokenCode);
 			int u_id = userservice.GetUserIDByName(user.getUsername(),
 					user.getPassword());
 			if (u_id > 0) {
-				reMap.put("ResultMessage", CommonUtils.SUCCESS);
-				reMap.put("userid", u_id);
-				reMap.put("token", tokenCode);
+				reJson.put("ResultMessage", CommonUtils.SUCCESS);
+				reJson.put("userid", u_id);
+				reJson.put("username",user.getUsername());
+				reJson.put("token", tokenCode);
 			} else {
-				reMap.put("ResultMessage", CommonUtils.ERROR);
+				reJson.put("ResultMessage", CommonUtils.ERROR);
 			}
 		}
-		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+		CommonUtils.toJson(ServletActionContext.getResponse(), reJson);
 	}
 
 	public void userUpdate() throws IOException {

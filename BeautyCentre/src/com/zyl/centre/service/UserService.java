@@ -72,6 +72,7 @@ public  class UserService extends AbstractService<User> implements IUserService 
 
 	@Override
 	public void createUser(User user, String tokenCode) {
+		dao.create(user);
 		Token token = new Token();
 		token.setUserid(user.getUserid());
 		token.setTokencode(tokenCode);
@@ -80,7 +81,6 @@ public  class UserService extends AbstractService<User> implements IUserService 
 		cal.add(Calendar.DAY_OF_MONTH, +30);// 取当前日期的后30天.
 		token.setCreatedatetime(currentDate);
 		token.setExpiredatetime(cal.getTime());
-		dao.create(user);
 		tokendao.createTokenCode(token);
 	}
 
