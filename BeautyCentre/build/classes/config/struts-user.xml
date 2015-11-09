@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 设置该应用使用的解码集 -->
+	<constant name="struts.i18n.encoding" value="GBK" />
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+	<!-- 与spring集成的写法，action等交予spring管理 -->
+	<package name="struts-user" extends="struts">
+		<action name="login" class="loginAction" method="login">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="unlogin" class="loginAction" method="unlogin">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="redirect">/success.jsp</result>
+		</action>
+		<action name="businessRegiste" class="BusinessRegiste" method="businessRegiste">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getOrdersInfo" class="orderAction" method="getOrdersInfo">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="editOrder" class="orderAction" method="editOrder">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getOrdersInfoByUserid" class="userAction"
+			method="getOrdersInfoByUserid">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="userRegiste" class="userAction" method="userRegiste">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="userUpdate" class="userAction" method="userUpdate">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="bookService" class="userAction" method="bookService">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getShopInfo" class="shopAction" method="getShopInfo">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getShopInfoByServiceid" class="shopAction"
+			method="getShopInfoByServiceid">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getHotShopsInfo" class="shopAction" method="getHotShopsInfo">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="updateShopInfo" class="shopAction" method="updateShopInfo">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getServsInfoByAreaType" class="serviceAction"
+			method="getServsInfoByAreaType">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getServsInfo" class="serviceAction" method="getServsInfo">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="deleteService" class="serviceAction" method="deleteService">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="getServtype" class="serviceAction" method="getServtype">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="produceService" class="serviceAction" method="produceService">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+		<action name="test" class="shopAction" method="test">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+	</package>
+
+</struts>

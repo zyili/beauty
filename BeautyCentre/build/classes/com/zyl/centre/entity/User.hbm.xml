@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.User" table="user" catalog="beautycentre">
+        <id name="userid" type="java.lang.Integer">
+            <column name="userid" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="20" not-null="true" />
+        </property>
+        <property name="realname" type="string">
+            <column name="realname" length="20" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="20" not-null="true" />
+        </property>
+        <property name="sex" type="java.lang.Integer">
+            <column name="sex" />
+        </property>
+        <property name="brithday" type="date">
+            <column name="brithday" length="0" />
+        </property>
+        <property name="profession" type="string">
+            <column name="profession" length="20" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="type" />
+        </property>
+        <property name="createtime" type="timestamp">
+            <column name="createtime" length="0" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="32" />
+        </property>
+        <property name="adress" type="string">
+            <column name="adress" length="65535" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="30" />
+        </property>
+        <property name="userdec" type="string">
+            <column name="userdec" length="65535" />
+        </property>
+        <property name="ext1" type="string">
+            <column name="ext1" length="10" />
+        </property>
+        <property name="ext2" type="string">
+            <column name="ext2" length="20" />
+        </property>
+        <set name="orders" inverse="true">
+            <key>
+                <column name="submituserid" not-null="true" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Order" />
+        </set>
+        <set name="shops" inverse="true">
+            <key>
+                <column name="createuserid" not-null="true" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Shop" />
+        </set>
+        <set name="tokens" inverse="true">
+            <key>
+                <column name="userid" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Token" />
+        </set>
+    </class>
+</hibernate-mapping>

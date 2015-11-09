@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Order" table="order" catalog="beautycentre">
+        <id name="orderid" type="java.lang.Integer">
+            <column name="orderid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.zyl.centre.entity.User" fetch="select">
+            <column name="submituserid" not-null="true" />
+        </many-to-one>
+        <property name="createtime" type="timestamp">
+            <column name="createtime" length="0" />
+        </property>
+        <property name="modifytime" type="timestamp">
+            <column name="modifytime" length="0" />
+        </property>
+        <property name="submitusername" type="string">
+            <column name="submitusername" length="20" />
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="state" />
+        </property>
+        <property name="ordphone" type="string">
+            <column name="ordphone" length="32" />
+        </property>
+        <property name="number" type="java.lang.Integer">
+            <column name="number" />
+        </property>
+        <property name="sumprice" type="java.lang.Integer">
+            <column name="sumprice" />
+        </property>
+        <property name="checkuserid" type="java.lang.Integer">
+            <column name="checkuserid" />
+        </property>
+        <property name="orderdec" type="string">
+            <column name="orderdec" length="65535" />
+        </property>
+        <set name="serviceordrels" inverse="true">
+            <key>
+                <column name="orderid" not-null="true" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Serviceordrel" />
+        </set>
+    </class>
+</hibernate-mapping>

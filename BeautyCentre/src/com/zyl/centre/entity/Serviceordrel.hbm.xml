@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Serviceordrel" table="serviceordrel" catalog="beautycentre">
+        <composite-id name="id" class="com.zyl.centre.entity.ServiceordrelId">
+            <key-property name="orderid" type="int">
+                <column name="orderid" />
+            </key-property>
+            <key-property name="serviceid" type="int">
+                <column name="serviceid" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="service" class="com.zyl.centre.entity.Service" update="false" insert="false" fetch="select">
+            <column name="serviceid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="order" class="com.zyl.centre.entity.Order" update="false" insert="false" fetch="select">
+            <column name="orderid" not-null="true" />
+        </many-to-one>
+        <property name="date" type="timestamp">
+            <column name="date" length="0" />
+        </property>
+        <property name="ext1" type="string">
+            <column name="ext1" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

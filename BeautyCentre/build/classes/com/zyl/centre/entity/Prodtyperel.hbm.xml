@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Prodtyperel" table="prodtyperel" catalog="beautycentre">
+        <composite-id name="id" class="com.zyl.centre.entity.ProdtyperelId">
+            <key-property name="productid" type="int">
+                <column name="productid" />
+            </key-property>
+            <key-property name="prodtypeid" type="int">
+                <column name="prodtypeid" />
+            </key-property>
+            <key-property name="serviceid" type="int">
+                <column name="serviceid" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="service" class="com.zyl.centre.entity.Service" update="false" insert="false" fetch="select">
+            <column name="serviceid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="product" class="com.zyl.centre.entity.Product" update="false" insert="false" fetch="select">
+            <column name="productid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="prodtype" class="com.zyl.centre.entity.Prodtype" update="false" insert="false" fetch="select">
+            <column name="prodtypeid" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 设置该应用使用的解码集 -->
+	<constant name="struts.i18n.encoding" value="GBK" />
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+	<!-- 与spring集成的写法，action等交予spring管理 -->
+	<package name="struts-img" extends="struts">
+		
+		
+		<action name="uploadimg" class="UploadImg" method="up">
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/jpg,image/x-png,image/pjpeg
+                </param>
+                <param name="maximumSize">10240000</param>
+            </interceptor-ref>
+		</action>
+		
+	</package>
+
+</struts>

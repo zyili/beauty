@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Token" table="token" catalog="beautycentre">
+        <id name="userid" type="int">
+            <column name="userid" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="com.zyl.centre.entity.User" update="false" insert="false" fetch="select">
+            <column name="userid" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="tokencode" type="string">
+            <column name="tokencode" length="35" />
+        </property>
+        <property name="createdatetime" type="timestamp">
+            <column name="createdatetime" length="0" />
+        </property>
+        <property name="expiredatetime" type="timestamp">
+            <column name="expiredatetime" length="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Shop" table="shop" catalog="beautycentre">
+        <id name="shopid" type="java.lang.Integer">
+            <column name="shopid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.zyl.centre.entity.Area" fetch="select">
+            <column name="areaid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.zyl.centre.entity.User" fetch="select">
+            <column name="createuserid" not-null="true" />
+        </many-to-one>
+        <property name="shopname" type="string">
+            <column name="shopname" length="10" not-null="true" />
+        </property>
+        <property name="shoptypeid" type="java.lang.Integer">
+            <column name="shoptypeid" />
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="state" />
+        </property>
+        <property name="createtime" type="timestamp">
+            <column name="createtime" length="0" />
+        </property>
+        <property name="shopdec" type="string">
+            <column name="shopdec" length="65535" />
+        </property>
+        <property name="ext1" type="string">
+            <column name="ext1" length="10" />
+        </property>
+        <property name="ext2" type="string">
+            <column name="ext2" length="20" />
+        </property>
+        <property name="ext3" type="string">
+            <column name="ext3" length="15" />
+        </property>
+        <set name="imgsrcs" inverse="true">
+            <key>
+                <column name="shopid" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Imgsrc" />
+        </set>
+        <set name="services" inverse="true">
+            <key>
+                <column name="shopid" not-null="true" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Service" />
+        </set>
+    </class>
+</hibernate-mapping>

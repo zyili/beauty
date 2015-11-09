@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Imgsrc" table="imgsrc" catalog="beautycentre">
+        <id name="imgid" type="java.lang.Integer">
+            <column name="imgid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="shop" class="com.zyl.centre.entity.Shop" fetch="select">
+            <column name="shopid" />
+        </many-to-one>
+        <many-to-one name="service" class="com.zyl.centre.entity.Service" fetch="select">
+            <column name="serviceid" />
+        </many-to-one>
+        <property name="imgname" type="string">
+            <column name="imgname" length="32" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="32" />
+        </property>
+        <property name="imgdec" type="string">
+            <column name="imgdec" length="65535" />
+        </property>
+        <property name="reviewid" type="java.lang.Integer">
+            <column name="reviewid" />
+        </property>
+    </class>
+</hibernate-mapping>

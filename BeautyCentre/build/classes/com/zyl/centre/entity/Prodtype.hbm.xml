@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Prodtype" table="prodtype" catalog="beautycentre">
+        <id name="prodtypeid" type="java.lang.Integer">
+            <column name="prodtypeid" />
+            <generator class="identity" />
+        </id>
+        <property name="prodtypename" type="string">
+            <column name="prodtypename" length="32" />
+        </property>
+        <property name="prodtypedec" type="string">
+            <column name="prodtypedec" length="65535" />
+        </property>
+        <property name="ext1" type="string">
+            <column name="ext1" length="10" />
+        </property>
+        <property name="ext2" type="string">
+            <column name="ext2" length="20" />
+        </property>
+        <set name="prodtyperels" inverse="true">
+            <key>
+                <column name="prodtypeid" not-null="true" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Prodtyperel" />
+        </set>
+    </class>
+</hibernate-mapping>
