@@ -54,8 +54,7 @@ public class BusinessRegiste extends ActionSupport{
 			System.out.println("user is null");
 		else
 			System.out.println("user is not null");
-		userservice.create(user);
-		int u_id = userservice.GetUserIDByName(user.getUsername(),user.getPassword());
+		int u_id = userservice.createShopUser(user);
 		if(u_id >= 0) {
 			reMap.put("ResulMessage", CommonUtils.SUCCESS);
 			reMap.put("userid", u_id);

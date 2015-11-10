@@ -1,0 +1,157 @@
+.locatnav {
+  padding: 10px 0 18px;
+  font-size: 14px;
+  line-height: 15px;
+  color: #666;
+  margin-bottom: 12px;
+}
+.bottombar{
+  margin-top:40px;
+  padding-top:45px;
+  height:105px;
+  width:100%;
+  background:#f1f1f1;
+}
+.bottombar img{
+  margin:0 auto;
+  display:block;
+}
+.usercenter-blcok{
+  font-size: 16px;
+  line-height: 20px;
+}
+.usercenter-blcok .ucb-leftpart{
+  background: #f6f6f6;
+  width: 198px;
+  border: 1px solid #dddddd;
+  height: 675px;
+  color: #666666;
+  font-size: 16px;
+  line-height: 20px;
+}
+.usercenter-blcok .ucb-leftpart li{
+  width: 100%;
+  display: block;
+  margin-top: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+.usercenter-blcok .ucb-leftpart .selectedulp{
+  color: #333333;
+  font-size: 18px;
+  cursor: default;
+}
+.usercenter-blcok .ucb-rightpart{
+  width: 978px;
+}
+.usercenter-blcok .ucb-rightpart .user-info-block{
+  border: 1px solid #dddddd;
+  height: 148px;
+  background: #f6f6f6;
+  margin-bottom: 9px;
+}
+
+.user-info-block .userpic{
+  margin: 22px 29px 0 25px;
+}
+.user-info-block .user-name{
+  font-size: 18px;
+  color: #333;
+  margin: 48px 0 0 0;
+}
+.user-info-block .appointments{
+  color: #f76120;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 5px;
+
+}
+.something-else-block{
+  border: 1px solid #dddddd;
+  background: #f6f6f6;
+  height: 516px;
+}
+.my-orders-block{
+  color:#666;
+}
+.my-orders-block .orders-tit{
+  border: 1px solid #dddddd;
+  height: 38px;
+  background: #f5f5f5;
+  margin-bottom: 9px;
+  line-height: 38px;
+  color: #666;
+}
+.orders-tit .fureoifm{
+  margin-left: 11px;
+}
+.orders-tit .fdsa44234fds li{
+  margin: 0 35px;
+}
+.my-orders-block .order-block{
+  border: 1px solid #ddd;
+  margin-bottom: 9px;
+}
+.order-block .ordertop-part{
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  height: 38px;
+  line-height: 38px;
+  padding-left: 11px;
+}
+.order-block .order-time{
+  margin-right: 50px;
+}
+.order-cotent{
+  padding: 19px 0 19px 9px;
+
+}
+.order-cotent img{
+  height: 100px;
+}
+.severname{
+  font-size: 18px;
+  line-height: 100px;
+  margin-left: 26px;
+}
+.orderco-right li{
+  line-height: 100px;
+  margin: 0 35px;
+}
+.edit-user-info-block{
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding-top: 19px;
+  height: 656px;
+}
+.edit-user-info-block .info-input-block{
+  margin: 0 auto;
+  width: 380px;
+}
+.edit-user-info-block .info-input-block label{
+  line-height: 28px;
+  font-size: 14px;
+  text-align: right;
+  width: 6em;
+  display: inline-block;
+}
+.edit-user-info-block .info-input-block input[id]{
+  background: #fff;
+  border: 1px solid #ddd;
+  line-height: 28px;
+  margin-bottom: 9px;
+  width: 273px;
+  padding-left: 10px;
+}
+.edit-user-info-block .info-input-block .submit-btn{
+  height: 40px;
+  display: block;
+  line-height: 40px;
+  padding: 0 50px;
+  font-size: 16px;
+  color: #fff;
+  margin: 41px auto 0;
+  background: #ff8a00;
+  border-radius: 3px;
+  cursor: pointer;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>优美吧</title>
+  <!-- 为移动设备添加 viewport -->
+  <meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=0,maximum-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="dist/css/initialStyle.css">
+  <link rel="stylesheet" type="text/css" href="dist/css/index.css">
+</head>
+
+<body>
+
+  <co-header></co-header>
+
+  <nav-bar page-index="0"></nav-bar>
+
+  <div class="banner-block mid1190" id="banner-block">
+    <div class="banners-scroll clearfix">
+      <div class="banner" :style="{right:danqianbanner * 1190 + 'px'}">
+        <img v-for="url in bannerImgsUrl" :src="url" height="380" width="1190" track-by="$index">
+
+      </div>
+    </div>
+    <div class="tagnumber clearfix">
+      <div v-for="(index) in bannerImgsUrl" class="tagn323" @click="scrollTo($index)" :class="danqianbanner==$index ? 'selectedtag':''" track-by="$index">{{$index + 1}}</div>
+    </div>
+  </div>
+  <div class="mid1190 clearfix">
+    <h1 class="pagetitle">热门商家</h1>
+    <div class="hot-service-block clearfix">
+      <img class="servicpic fl" src="dist/images/servicpic.jpg" height="160" width="260" alt="">
+      <div class="servicdetiail fl">
+        <h3>Red Lips 半永久纹绣专业店</h3>
+        <div class="rateblock clearfix">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+        </div>
+        <p>服务类型：美甲服务</p>
+        <p>地址：栖霞区文枢东路7号晴天广场4楼</p>
+        <div class="forsaleblock clearfix">
+          <div style="background: #ff0404">优惠活动</div>
+          <div style="background: #ff0486">优惠活动</div>
+          <div style="background: #a904ff">优惠活动</div>
+          <div style="background: #ff9e04">优惠活动</div>
+        </div>
+      </div>
+      <div class="pricetag fr">
+        <h1>¥200</h1>
+        <p>人均消费</p>
+      </div>
+    </div>
+    <div class="hot-service-block clearfix">
+      <img class="servicpic fl" src="dist/images/servicpic.jpg" height="160" width="260" alt="">
+      <div class="servicdetiail fl">
+        <h3>Red Lips 半永久纹绣专业店</h3>
+        <div class="rateblock clearfix">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+        </div>
+        <p>服务类型：美甲服务</p>
+        <p>地址：栖霞区文枢东路7号晴天广场4楼</p>
+        <div class="forsaleblock clearfix">
+          <div style="background: #ff0404">优惠活动</div>
+          <div style="background: #ff0486">优惠活动</div>
+          <div style="background: #a904ff">优惠活动</div>
+          <div style="background: #ff9e04">优惠活动</div>
+        </div>
+      </div>
+      <div class="pricetag fr">
+        <h1>¥200</h1>
+        <p>人均消费</p>
+      </div>
+    </div>
+    <div class="hot-service-block clearfix">
+      <img class="servicpic fl" src="dist/images/servicpic.jpg" height="160" width="260" alt="">
+      <div class="servicdetiail fl">
+        <h3>Red Lips 半永久纹绣专业店</h3>
+        <div class="rateblock clearfix">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+          <img src="dist/images/ratestar.png" height="20" width="21" alt="">
+        </div>
+        <p>服务类型：美甲服务</p>
+        <p>地址：栖霞区文枢东路7号晴天广场4楼</p>
+        <div class="forsaleblock clearfix">
+          <div style="background: #ff0404">优惠活动</div>
+          <div style="background: #ff0486">优惠活动</div>
+          <div style="background: #a904ff">优惠活动</div>
+          <div style="background: #ff9e04">优惠活动</div>
+        </div>
+      </div>
+      <div class="pricetag fr">
+        <h1>¥200</h1>
+        <p>人均消费</p>
+      </div>
+    </div>
+    <div class="floatcenter fl clearfix">
+      <div class="pagessplit fl clearfix">
+        <div class="pagebk pagebkselected">1</div>
+        <div class="pagebk">2</div>
+        <div class="pagebk">3</div>
+        <div class="pagebk">4</div>
+        <div class="pagebk">10</div>
+        <div class="pagebk">下一页</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottombar">
+    <img src="dist/images/xuafnf443.png" height="56" width="933" alt="">
+  </div>
+
+  <script src="dist/js/common.js"></script>
+  <script src="dist/js/index.entry.js"></script>
+  <!-- <script src="/webpack-dev-server.js"></script> -->
+
+</body>
+
+</html>

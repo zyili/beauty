@@ -300,7 +300,7 @@ public class ShopAction extends ActionSupport {
 		 * reMap.put("shopname",CommonUtils.serviceToJson(ser));
 		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 		 */
-		Area a = areaService.GetByName("武进区", "常州");
+		/*Area a = areaService.GetByName("武进区", "常州");
 		Shop shop = new Shop();
 		User user=userservice.findAll().get(0);
 		shop.setUser(user);
@@ -309,6 +309,13 @@ public class ShopAction extends ActionSupport {
 		shopService.create(shop);
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		reMap.put("hotshops", CommonUtils.shopsToJson(shopService.findAll()));
+		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);*/
+		User user=new User();
+		user.setUsername("sun");
+		user.setPassword("111");
+		userservice.createShopUser(user);
+		Map<String, Object> reMap = new HashMap<String, Object>();
+		reMap.put("hotshops", user.getUsername()+user.getUserid().toString());
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 	}
 

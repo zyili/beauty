@@ -10,14 +10,18 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.zyl.centre.common.utils.IOperations;
+import com.zyl.centre.dao.IAreaDao;
 import com.zyl.centre.dao.IOrderDao;
 import com.zyl.centre.dao.IServiceDao;
 import com.zyl.centre.dao.IServiceordrelDao;
+import com.zyl.centre.dao.IShopDao;
 import com.zyl.centre.dao.ITokenDao;
 import com.zyl.centre.dao.IUserDao;
+import com.zyl.centre.entity.Area;
 import com.zyl.centre.entity.Order;
 import com.zyl.centre.entity.Serviceordrel;
 import com.zyl.centre.entity.ServiceordrelId;
+import com.zyl.centre.entity.Shop;
 import com.zyl.centre.entity.Token;
 import com.zyl.centre.entity.User;
 
@@ -38,6 +42,13 @@ public  class UserService extends AbstractService<User> implements IUserService 
 
 	@Resource(name = "serviceordrelDao")
 	private IServiceordrelDao rel_dao;
+	
+	@Resource(name = "areaDao")
+	private IAreaDao a_dao;
+	
+
+	@Resource(name = "shopDao")
+	private IShopDao shop_dao;
 	
 	public UserService() {
 		super();
@@ -112,5 +123,18 @@ public  class UserService extends AbstractService<User> implements IUserService 
 		ordrel.setId(new ServiceordrelId(ord.getOrderid(),serv.getServiceid()));
 		rel_dao.create(ordrel);
 		return ord;
+	}
+
+	@Override
+	public int createShopUser(User user) {
+		// TODO Auto-generated method stub
+		dao.create(user);
+		Area a=a_dao.GetByName("¹ÄÂ¥Çø","ÄÏ¾©");
+		Shop shop=new Shop();
+		shop.setArea(a);
+		shop.setShopname("shop of "+user.getUsername());
+		shop.setUser(user);
+		shop_dao.create(shop);
+		return user.getUserid();
 	}
 }

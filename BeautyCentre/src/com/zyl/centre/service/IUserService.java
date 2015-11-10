@@ -16,4 +16,5 @@ public interface IUserService extends IOperations<User> {
 	void createUser(User user,String tokenCode);
 	User findUserByUserid(int id);
 	Order bookService(int uerid,int serviceid,int number);
+	int createShopUser(User user);
 }

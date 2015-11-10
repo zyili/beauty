@@ -1,0 +1,177 @@
+.filt-by-block {
+  border: 1px solid #e8e8e8;
+  color: #666666;
+  font-size: 14px;
+  text-align: center;
+  line-height: 30px;
+  padding: 0 20px;
+  margin-bottom: 9px;
+}
+.filt-by-block .filtname {
+  height: 38px;
+  width: 118px;
+  line-height: 38px;
+  border-right: 1px solid #e8e8e8;
+  color: #333333;
+  margin-right: 25px;
+}
+.filt-by-block li {
+  cursor: pointer;
+  float: left;
+  height: 30px;
+  padding: 0 15px;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+.filt-by-block .selectedli {
+  cursor: default;
+  background: #ff66be;
+  color: #fff;
+  border-radius: 4px;
+}
+.bottomline233 {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 0;
+}
+.bottomline233:last-child{
+  border: none;
+}
+.sort-by-block{
+  border: 1px solid #e8e8e8;
+  background: #f5f5f5;
+  color: #000000;
+  line-height: 38px;
+  text-align: center;
+  margin-bottom: 9px;
+}
+.sort-by-block li{
+  cursor: pointer;
+  float: left;
+  width: 138px;
+}
+.sort-by-block .selectedsortby{
+  cursor: default;
+  background: #fff;
+  color: #ff0093;
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+}
+.sort-by-block .selectedsortby:first-child{
+  border-left: none;
+}
+.pagetitle {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #000000;
+  line-height: 20px;
+}
+
+.pagetitle:before {
+  content: '';
+  border-left: 3px solid #ff66be;
+  margin-right: 7px;
+  float: left;
+  height: 20px;
+}
+
+.hot-service-block {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  padding: 9px;
+  margin: 10px 0;
+}
+
+.hot-service-block .servicpic {
+  margin-right: 10px;
+}
+
+.hot-service-block .servicdetiail {
+  position: relative;
+  height: 160px;
+  color: #666;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.hot-service-block .servicdetiail p {
+  margin-left: 8px;
+}
+
+.hot-service-block .servicdetiail h3 {
+  margin-left: 8px;
+  font-size: 18px;
+  color: #333;
+}
+
+.hot-service-block .servicdetiail .rateblock {
+  margin: 10px 0 20px 8px;
+}
+
+.hot-service-block .servicdetiail .rateblock img {
+  float: left;
+  margin-right: 5px;
+}
+
+.hot-service-block .servicdetiail .forsaleblock {
+  position: absolute;
+  bottom: 0;
+  width: 320px;
+}
+
+.hot-service-block .servicdetiail .forsaleblock div {
+  float: left;
+  padding: 5px 7px;
+  font-size: 14px;
+  line-height: 14px;
+  border-radius: 2px;
+  text-align: center;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.pricetag h1 {
+  color: #ff9e04;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.pricetag p {
+  font-size: 16px;
+  color: #666;
+  line-height: 16px;
+}
+
+.floatcenter{
+  position:relative;
+  left:50%;
+}
+.pagessplit{
+  position:relative;
+  left: -50%;
+}
+.pagessplit .pagebk{
+  float:left;
+  border:1px solid #ff66be;
+  font-size:18px;
+  padding:10px 13px;
+  color: #ff66be;
+  margin-right:10px;
+  cursor:pointer;
+}
+.pagessplit .pagebkselected{
+  background:#ff66be;
+  color:#fff;
+  cursor:default;
+}
+.bottombar{
+  margin-top:40px;
+  padding-top:45px;
+  height:105px;
+  width:100%;
+  background:#f1f1f1;
+}
+.bottombar img{
+  margin:0 auto;
+  display:block;
+}
