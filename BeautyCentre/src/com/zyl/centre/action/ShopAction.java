@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,7 +47,7 @@ public class ShopAction extends ActionSupport {
 	private Log log = LogFactory.getLog(LoginAction.class);
 	@Resource(name = "shopService")
 	public IShopService shopService;
-	
+
 	@Resource(name = "userservice")
 	private IUserService userservice;
 
@@ -300,29 +301,30 @@ public class ShopAction extends ActionSupport {
 		 * reMap.put("shopname",CommonUtils.serviceToJson(ser));
 		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 		 */
-		/*Area a = areaService.GetByName("武进区", "常州");
-		Shop shop = new Shop();
-		User user=userservice.findAll().get(0);
-		shop.setUser(user);
-		shop.setShopname("wwww");
-		shop.setArea(a);
-		shopService.create(shop);
-		Map<String, Object> reMap = new HashMap<String, Object>();
-		reMap.put("hotshops", CommonUtils.shopsToJson(shopService.findAll()));
-		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);*/
-		User user=new User();
+		/*
+		 * Area a = areaService.GetByName("武进区", "常州"); Shop shop = new Shop();
+		 * User user=userservice.findAll().get(0); shop.setUser(user);
+		 * shop.setShopname("wwww"); shop.setArea(a); shopService.create(shop);
+		 * Map<String, Object> reMap = new HashMap<String, Object>();
+		 * reMap.put("hotshops",
+		 * CommonUtils.shopsToJson(shopService.findAll()));
+		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+		 */
+		User user = new User();
 		user.setUsername("sun");
 		user.setPassword("111");
 		userservice.createShopUser(user);
 		Map<String, Object> reMap = new HashMap<String, Object>();
-		reMap.put("hotshops", user.getUsername()+user.getUserid().toString());
+		reMap.put("hotshops", user.getUsername() + user.getUserid().toString());
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 	}
 
 	public void getHotShopsInfo() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		if (cityname != null) {
-			List<Shop> shops = shopService.getHotShops(cityname);
+			String city = URLDecoder.decode(cityname, "UTF-8");
+			System.out.println("city----"+city);
+			List<Shop> shops = shopService.getHotShops(city);
 			if (shops.size() > 0) {
 				reMap.put("ResultMessage", CommonUtils.SUCCESS);
 				reMap.put("IfExist", "yes");

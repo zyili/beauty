@@ -1,6 +1,7 @@
 package com.zyl.centre.action;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,6 +38,8 @@ public class UserAction extends ActionSupport {
 
 	private String token;
 	private User user;
+	private Service service;
+	private int number;
 	@Resource(name = "userservice")
 	private IUserService userservice;
 
@@ -48,10 +51,10 @@ public class UserAction extends ActionSupport {
 
 	@Resource(name = "serviceService")
 	private IServiceService m_Service;
-	
+
 	@Resource(name = "serviceordrelService")
 	private IServiceordrelService rel_Service;
-	
+
 	private Log log = LogFactory.getLog(LoginAction.class);
 
 	public User getUser() {
@@ -101,12 +104,16 @@ public class UserAction extends ActionSupport {
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 	}
 
-	public void userRegiste() throws IOException {	
+	public void userRegiste() throws IOException {
 		JSONObject reJson = new JSONObject();
 		if (user == null || user.getUsername() == null
 				|| user.getPassword() == null || user.getType() == null) {
 			reJson.put("ResultMessage", CommonUtils.PARAMERROR);
 		} else {
+			if (user.getRealname() != null) {
+				String name = URLDecoder.decode(user.getRealname(), "UTF-8");
+				user.setRealname(name);
+			}
 			String tokenCode = getTokenCode();
 			userservice.createUser(user, tokenCode);
 			int u_id = userservice.GetUserIDByName(user.getUsername(),
@@ -114,7 +121,7 @@ public class UserAction extends ActionSupport {
 			if (u_id > 0) {
 				reJson.put("ResultMessage", CommonUtils.SUCCESS);
 				reJson.put("userid", u_id);
-				reJson.put("username",user.getUsername());
+				reJson.put("username", user.getUsername());
 				reJson.put("token", tokenCode);
 			} else {
 				reJson.put("ResultMessage", CommonUtils.ERROR);
@@ -125,14 +132,17 @@ public class UserAction extends ActionSupport {
 
 	public void userUpdate() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
-		if(token==null)
-		{
+		if (token == null) {
 			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
-			CommonUtils.toJson(ServletActionContext.getResponse(), reMap); 
+			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
 		Map<String, Object> tokenmap = TokenUtils.manageToken(token);
 		if (tokenmap.get("message").equals("SUCCESS")) {
+			if (user.getRealname() != null) {
+				String name = URLDecoder.decode(user.getRealname(), "UTF-8");
+				user.setRealname(name);
+			}
 			if (user.getUserid() != null) {
 				userservice.update(user);
 				reMap.put("ResultMessage", CommonUtils.SUCCESS);
@@ -156,15 +166,54 @@ public class UserAction extends ActionSupport {
 		log.info("get token success");
 		return tokencode;
 	}
-	
-	public void bookService() throws IOException
-	{
-		int uerid=1;
-		int serviceid=1;
-		int number=2;
-		Order ord=userservice.bookService(uerid, serviceid, number);
-		List<Order> ords= new ArrayList<Order>();
-		ords.add(ord);
-		CommonUtils.toJson(ServletActionContext.getResponse(),CommonUtils.ordsToJosn(ords, m_Service) );
+
+	public void bookService() throws IOException {
+		JSONObject rejson = new JSONObject();
+		if (token == null) {
+			rejson.put("ResultMessage", CommonUtils.ERRORTOKEN);
+			CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
+			return;
+		}
+		Map<String, Object> tokenmap = TokenUtils.manageToken(token);
+		if (tokenmap.get("message").toString().equals("SUCCESS")) {
+			if (number < 0 || service == null || service.getServiceid() == null) {
+				rejson.put("ResultMessage", CommonUtils.PARAMERROR);
+				CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
+				return;
+			}
+			Order ord = userservice.bookService(
+					Integer.valueOf(tokenmap.get("userid").toString()),
+					service.getServiceid(), number);
+			if(ord!=null)
+			{
+				rejson.put("ResultMessage", CommonUtils.SUCCESS);
+				rejson.put("orderid",ord.getOrderid());
+			}else
+			{
+				rejson.put("ResultMessage", CommonUtils.ERROR);
+			}
+
+		} else if (tokenmap.get("message").toString().equals("TOKENOUT")) {
+			rejson.put("ResultMessage", CommonUtils.TOKENOUT);
+		} else {
+			rejson.put("ResultMessage", CommonUtils.ERRORTOKEN);
+		}
+		CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 }
