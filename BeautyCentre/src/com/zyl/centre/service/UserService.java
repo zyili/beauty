@@ -130,6 +130,10 @@ public  class UserService extends AbstractService<User> implements IUserService 
 		// TODO Auto-generated method stub
 		dao.create(user);
 		Area a=a_dao.GetByName("¹ÄÂ¥Çø","ÄÏ¾©");
+		if(a==null)
+		{
+			a=a_dao.findAll().get(0);
+		}
 		Shop shop=new Shop();
 		shop.setArea(a);
 		shop.setShopname("shop of "+user.getUsername());
