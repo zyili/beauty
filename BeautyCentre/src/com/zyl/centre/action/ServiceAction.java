@@ -237,6 +237,10 @@ public class ServiceAction extends ActionSupport {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		JSONObject json = CommonUtils.getJson();
 		if (json == null || json.toString() == "{}") {
+			List<Service> ser = m_Service.findAll();
+			reMap.put("ResultMessage", CommonUtils.SUCCESS);
+			reMap.put("IfExist", "yes");
+			reMap.put("servs", CommonUtils.serviceToJson(ser));
 			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 		} else {
 			boolean falge = false;
@@ -277,7 +281,7 @@ public class ServiceAction extends ActionSupport {
 	public void getServsInfo() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		if (shop == null || token == null) {
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
+			reMap.put("ResultMessage", CommonUtils.SUCCESS);
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}

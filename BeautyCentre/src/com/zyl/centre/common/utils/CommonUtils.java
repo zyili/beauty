@@ -39,7 +39,7 @@ public class CommonUtils {
 			throws IOException {
 		Gson gson = new Gson();
 		String result = gson.toJson(data);// 将Map转换为json格式的数据
-		System.out.print("返回客户端的json:" + result);
+		System.out.println("返回客户端的json:" + result);
 		response.setContentType("text/json; charset=utf-8");
 		response.setHeader("Cache-Control", "no-cache"); // 取消浏览器缓存
 		PrintWriter out = response.getWriter();

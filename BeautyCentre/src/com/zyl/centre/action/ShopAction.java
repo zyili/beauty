@@ -325,11 +325,14 @@ public class ShopAction extends ActionSupport {
 			String city = URLDecoder.decode(cityname, "UTF-8");
 			System.out.println("city----"+city);
 			List<Shop> shops = shopService.getHotShops(city);
+			System.out.println("hotshopsname======================"+shops.get(0).getShopname());
+			System.out.println("hotshopsize======================"+shops.size());
 			if (shops.size() > 0) {
 				reMap.put("ResultMessage", CommonUtils.SUCCESS);
 				reMap.put("IfExist", "yes");
 				reMap.put("hotshops", CommonUtils.shopsToJson(shops));
 			} else {
+				reMap.put("ResultMessage", CommonUtils.SUCCESS);
 				reMap.put("IfExist", "no");
 			}
 		} else {
