@@ -25,11 +25,11 @@ public class AreaDao extends HibernateDao<Area> implements IAreaDao {
 	public Area GetByName(String areaname, String cityname) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "SELECT a.* FROM `area`AS a,`district` AS d WHERE a.`districtid`=d.`districtid` AND a.`areaname`= '"
+			String sql = "SELECT Area.* FROM area AS Area,`district` AS d WHERE Area.`districtid`=d.`districtid` AND Area.`areaname`= '"
 					+ areaname + "' AND d.`districtname`='" + cityname + "'";
 			@SuppressWarnings("unchecked")
 			List<Area> as = (List<Area>) getCurrentSession()
-					.createSQLQuery(sql).addEntity(Area.class).list();
+					.createSQLQuery(sql).addEntity("Area",Area.class).list();
 			if(!as.isEmpty())
 			{
 				return as.get(0);

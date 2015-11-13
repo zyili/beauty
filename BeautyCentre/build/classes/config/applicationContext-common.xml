@@ -60,7 +60,7 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.user}" />
 		<property name="password" value="${jdbc.pass}" />
-		<property name="initialSize" value="5"></property>
+		<property name="initialSize" value="8"></property>
 		<property name="maxActive" value="30"></property>
 		<property name="maxIdle" value="20"></property>
 		<property name="minIdle" value="1"></property>
@@ -84,6 +84,9 @@
 	<!-- 事务的传播特性 -->
 	<tx:advice id="txadvice" transaction-manager="transactionManager">
 		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="book*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />		
 			<tx:method name="add*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="modify*" propagation="REQUIRED" />

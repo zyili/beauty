@@ -53,7 +53,7 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/*
-	 * µÇÂ¼½Ó¿Ú
+	 * ï¿½ï¿½Â¼ï¿½Ó¿ï¿½
 	 */
 	public void login() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
@@ -69,9 +69,9 @@ public class LoginAction extends ActionSupport {
 					Token token = new Token();
 					token.setUserid(getuser.getUserid());
 					token.setTokencode(tokencode);
-					Calendar cal = Calendar.getInstance();// È¡µ±Ç°ÈÕÆÚ¡£
+					Calendar cal = Calendar.getInstance();// è·å–å½“å‰æ—¶é—´
 					Date currentDate = cal.getTime();
-					cal.add(Calendar.DAY_OF_MONTH, +30);// È¡µ±Ç°ÈÕÆÚµÄºó30Ìì.
+					cal.add(Calendar.DAY_OF_MONTH, +30);// è·å–30å¤©åæ—¶é—´
 					token.setCreatedatetime(currentDate);
 					token.setExpiredatetime(cal.getTime());
 					tokenService.createTokenCode(token);
@@ -91,7 +91,7 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/*
-	 * Î´µÇÂ¼/µÇÂ¼Òì³£´¦Àí
+	 * æœªç™»å½•/ç™»å½•å¼‚å¸¸å¤„ç†
 	 */
 	public void errorLogin() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
@@ -107,14 +107,14 @@ public class LoginAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> map = CommonUtils.getsetSessionMap();// »ñÈ¡sessionµÄtokenĞÅÏ¢
+		Map<String, Object> map = CommonUtils.getsetSessionMap();// è·å–sessionçš„tokenä¿¡æ¯
 		String tokenCode = this.token;
 		if (map != null) {
 
 			if (tokenCode.equals(map.get("tokenCode").toString())) {
 				/*
-				 * Èç¹ûsessionÖĞµÄtokenÓë´«¹ıÀ´µÄtokenÏàÍ¬
-				 * Ôò½øĞĞ×¢Ïú²Ù×÷£¬É¾³ısessionÖĞµÄÄÚÈİºÍÉ¾³ıÓÃ»§ÔÚÊı¾İ¿âÖĞ±£´æµÄtokenĞÅÏ¢
+				 * å¦‚æœsessionä¸­çš„tokenä¸ä¼ è¿‡æ¥çš„tokenç›¸åŒ
+				 * åˆ™è¿›è¡Œæ³¨é”€æ“ä½œï¼Œåˆ é™¤sessionä¸­çš„å†…å®¹å’Œåˆ é™¤ç”¨æˆ·åœ¨æ•°æ®åº“ä¸­ä¿å­˜çš„tokenä¿¡æ¯
 				 */
 				ActionContext.getContext().getSession().remove("sessionMap");
 				Token token = new Token();
@@ -128,8 +128,8 @@ public class LoginAction extends ActionSupport {
 				Token gettoken = tokenService.findOneByCode(tokenCode);
 				if (gettoken != null) {
 					/*
-					 * Èç¹ûÊı¾İ¿âÖĞµÄtokenÓë´«¹ıÀ´µÄtokenÏàÍ¬
-					 * Ôò½øĞĞ×¢Ïú²Ù×÷£¬É¾³ısessionÖĞµÄÄÚÈİºÍÉ¾³ıÓÃ»§ÔÚÊı¾İ¿âÖĞ±£´æµÄtokenĞÅÏ¢
+					 * å¦‚æœæ•°æ®åº“ä¸­çš„tokenä¸ä¼ è¿‡æ¥çš„tokenç›¸åŒ
+					 * åˆ™è¿›è¡Œæ³¨é”€æ“ä½œï¼Œåˆ é™¤sessionä¸­çš„å†…å®¹å’Œåˆ é™¤ç”¨æˆ·åœ¨æ•°æ®åº“ä¸­ä¿å­˜çš„tokenä¿¡æ¯
 					 */
 					ActionContext.getContext().getSession()
 							.remove("sessionMap");
@@ -137,7 +137,7 @@ public class LoginAction extends ActionSupport {
 					reFlage = CommonUtils.SUCCESS;
 				} else {
 					/*
-					 * Èç¹ûÊı¾İ¿âÖĞµÄtokenÓë´«¹ıÀ´µÄtoken²»Í¬ ±íÊ¾tokenCode´íÎó
+					 * å¦‚æœæ•°æ®åº“ä¸­çš„tokenä¸ä¼ è¿‡æ¥çš„tokenä¸åŒ è¡¨ç¤ºtokenCodeé”™è¯¯
 					 */
 					reFlage = CommonUtils.ERRORTOKEN;
 				}

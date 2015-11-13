@@ -57,10 +57,12 @@ public class BusinessRegiste extends ActionSupport{
 		int u_id = userservice.createShopUser(user);
 		if(u_id >= 0) {
 			reMap.put("ResulMessage", CommonUtils.SUCCESS);
-			reMap.put("userid", u_id);
-			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+			reMap.put("userid", u_id);		
+		}else
+		{
+			reMap.put("ResulMessage", CommonUtils.ERROR);
 		}
-		return;		
+		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 	}
 	
 

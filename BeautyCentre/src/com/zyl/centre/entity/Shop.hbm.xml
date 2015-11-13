@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<!-- Generated 2015-11-12 21:49:27 by Hibernate Tools 3.2.2.GA -->
 <hibernate-mapping>
     <class name="com.zyl.centre.entity.Shop" table="shop" catalog="beautycentre">
         <id name="shopid" type="java.lang.Integer">
@@ -15,10 +15,28 @@
             <column name="createuserid" not-null="true" />
         </many-to-one>
         <property name="shopname" type="string">
-            <column name="shopname" length="10" not-null="true" />
+            <column name="shopname" length="100" not-null="true" />
         </property>
         <property name="shoptypeid" type="java.lang.Integer">
             <column name="shoptypeid" />
+        </property>
+        <property name="shopphone" type="string">
+            <column name="shopphone" length="25" />
+        </property>
+        <property name="shopaddress" type="string">
+            <column name="shopaddress" length="100" />
+        </property>
+        <property name="perconsum" type="java.lang.Integer">
+            <column name="perconsum" />
+        </property>
+        <property name="businesstime" type="string">
+            <column name="businesstime" length="50" />
+        </property>
+        <property name="shoplevel" type="java.lang.Integer">
+            <column name="shoplevel" />
+        </property>
+        <property name="discountmessage" type="string">
+            <column name="discountmessage" length="100" />
         </property>
         <property name="state" type="java.lang.Integer">
             <column name="state" />

@@ -149,18 +149,18 @@ public class OrderAction extends ActionSupport {
 		}
 		Map<String, Object> maptoken = TokenUtils.manageToken(token);
 		if (maptoken.get("message").equals("SUCCESS")) {
-			if (order.getOrderid() == null) {//idÎª¿Õ
+			if (order.getOrderid() == null) {//idä¸ºç©º
 				reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 			} else {
 				int id = order.getOrderid();
 				Order getOrd = orderservice.getOrdByid(id);
-				if (getOrd != null) {//getord ²»Îª¿Õ
-					if (optype == 1) // ¶©µ¥Íê³É
+				if (getOrd != null) {//getord ä¸ä¸ºç©º
+					if (optype == 1) // è®¢å•å®Œæˆ
 					{
 						getOrd.setState(1);
 						orderservice.update(getOrd);
 						reMap.put("ResultMessage", CommonUtils.SUCCESS);
-					} else if (optype == 0) // ¶©µ¥¹Ø±Õ
+					} else if (optype == 0) // è®¢å•å…³é—­
 					{
 						getOrd.setState(0);
 						orderservice.update(getOrd);
@@ -168,7 +168,7 @@ public class OrderAction extends ActionSupport {
 					} else {
 						reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 					}
-				} else { //getord Îª¿Õ
+				} else {//getord ä¸ºç©º
 					reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 				}
 			}

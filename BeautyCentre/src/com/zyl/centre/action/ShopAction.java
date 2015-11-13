@@ -296,13 +296,13 @@ public class ShopAction extends ActionSupport {
 		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 		 * List<Integer> prodtypeid =new ArrayList<Integer>();
 		 * prodtypeid.add(1); prodtypeid.add(2); List<Service>
-		 * ser=m_Service.getServByAreaType("ÄÏ¾©","½­±±ÐÂÇø", 1, prodtypeid);
+		 * ser=m_Service.getServByAreaType("ï¿½Ï¾ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 1, prodtypeid);
 		 * Map<String, Object> reMap = new HashMap<String, Object>();
 		 * reMap.put("shopname",CommonUtils.serviceToJson(ser));
 		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 		 */
 		/*
-		 * Area a = areaService.GetByName("Îä½øÇø", "³£ÖÝ"); Shop shop = new Shop();
+		 * Area a = areaService.GetByName("ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½"); Shop shop = new Shop();
 		 * User user=userservice.findAll().get(0); shop.setUser(user);
 		 * shop.setShopname("wwww"); shop.setArea(a); shopService.create(shop);
 		 * Map<String, Object> reMap = new HashMap<String, Object>();
@@ -321,12 +321,10 @@ public class ShopAction extends ActionSupport {
 
 	public void getHotShopsInfo() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
-		if (cityname != null) {
+		if (cityname != null) {			
 			String city = URLDecoder.decode(cityname, "UTF-8");
-			System.out.println("city----"+city);
+			System.out.println("city--------------------"+city);
 			List<Shop> shops = shopService.getHotShops(city);
-			System.out.println("hotshopsname======================"+shops.get(0).getShopname());
-			System.out.println("hotshopsize======================"+shops.size());
 			if (shops.size() > 0) {
 				reMap.put("ResultMessage", CommonUtils.SUCCESS);
 				reMap.put("IfExist", "yes");

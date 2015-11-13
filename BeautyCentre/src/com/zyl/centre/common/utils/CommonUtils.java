@@ -28,20 +28,20 @@ import com.zyl.centre.service.IServiceService;
 
 public class CommonUtils {
 
-	public static final int JSONERROR = -900;// ´«ÈëjsonÊı¾İ´íÎó
-	public static final int ERROR = -999;// ÏµÍ³´íÎó
-	public static final int PARAMERROR = -901;// ²ÎÊı²»ÄÜÎª¿Õ
+	public static final int JSONERROR = -900;// ä¼ å…¥jsonæ•°æ®é”™è¯¯
+	public static final int ERROR = -999;// ç³»ç»Ÿé”™è¯¯
+	public static final int PARAMERROR = -901;// å‚æ•°ä¸èƒ½ä¸ºç©º
 	public static final int SUCCESS = 0;
-	public static final int TOKENOUT = -902;// Token ³¬¹ıÆÚÏŞ
-	public static final int ERRORTOKEN = -903;// Token ×Ö·û´®´íÎó
+	public static final int TOKENOUT = -902;// Token è¶…è¿‡æœŸé™
+	public static final int ERRORTOKEN = -903;// Token å­—ç¬¦ä¸²é”™è¯¯
 
 	public static void toJson(HttpServletResponse response, Object data)
 			throws IOException {
 		Gson gson = new Gson();
-		String result = gson.toJson(data);// ½«Map×ª»»Îªjson¸ñÊ½µÄÊı¾İ
-		System.out.println("·µ»Ø¿Í»§¶ËµÄjson:" + result);
+		String result = gson.toJson(data);// å°†Mapè½¬æ¢ä¸ºjsonæ ¼å¼çš„æ•°æ®
+		System.out.println("è¿”å›å®¢æˆ·ç«¯çš„json:" + result);
 		response.setContentType("text/json; charset=utf-8");
-		response.setHeader("Cache-Control", "no-cache"); // È¡Ïûä¯ÀÀÆ÷»º´æ
+		response.setHeader("Cache-Control", "no-cache"); // å–æ¶ˆæµè§ˆå™¨ç¼“å­˜
 		PrintWriter out = response.getWriter();
 		out.println(result);
 		out.flush();
@@ -111,6 +111,12 @@ public class CommonUtils {
 				json.put("shopname", shops.get(i).getShopname());
 				json.put("shoptypeid", shops.get(i).getShoptypeid());
 				json.put("createuserid", shops.get(i).getUser().getUserid());
+				json.put("shopphone", shops.get(i).getShopphone());
+				json.put("shopaddress", shops.get(i).getShopaddress());
+				json.put("perconsum", shops.get(i).getPerconsum());
+				json.put("businesstime", shops.get(i).getBusinesstime());
+				json.put("shoplevel", shops.get(i).getShoplevel());
+				json.put("discountmessage", shops.get(i).getDiscountmessage());
 				json.put("state", shops.get(i).getState());
 				json.put("city", shops.get(i).getArea().getDistrict()
 						.getDistrictname());

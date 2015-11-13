@@ -236,12 +236,12 @@ public class ServiceAction extends ActionSupport {
 	public void getServsInfoByAreaType() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		JSONObject json = CommonUtils.getJson();
+		System.out.println("瀹㈡埛绔幏鍙栧埌鐨刯son------------"+json);
 		if (json == null || json.toString() == "{}") {
 			List<Service> ser = m_Service.findAll();
 			reMap.put("ResultMessage", CommonUtils.SUCCESS);
 			reMap.put("IfExist", "yes");
 			reMap.put("servs", CommonUtils.serviceToJson(ser));
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 		} else {
 			boolean falge = false;
 			String city = json.getString("cityname");
@@ -249,9 +249,8 @@ public class ServiceAction extends ActionSupport {
 			if (city == null || area == null) {
 				falge = true;
 			}
-			Integer prodid = Integer.valueOf(json.getString("prodctid"));// 大类
+			Integer prodid = Integer.valueOf(json.getString("prodctid"));
 			JSONArray ids = JSONArray.fromObject(json.get("types"));// type
-			// 查询服务的所有小类
 			if (prodid == null || ids == null) {
 				falge = true;
 			}

@@ -24,8 +24,9 @@ public class CheckLogin implements Interceptor {
 	@Override
 	public String intercept(ActionInvocation arg0) throws Exception {
 
+		return arg0.invoke();
+		/*
 		System.out.println("------CheckLogin.intercept------");
-
 		Map session = ActionContext.getContext().getSession();
 		Object action = arg0.getAction();
 		if (action instanceof LoginAction) {
@@ -38,10 +39,10 @@ public class CheckLogin implements Interceptor {
 			System.out.println("already login!");
 			return arg0.invoke();
 		} else {
-			// 否则终止后续操作，返回LOGIN
 			System.out.println("no login, forward login page!");
 			return LOGIN_PAGE;
 		}
+		*/
 	}
 
 }

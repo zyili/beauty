@@ -73,7 +73,7 @@ public class TokenUtils {
 	public static Map<String, Object> manageToken(String tokenCode) {
 		ITokenService tokenService = new TokenService();
 		Map<String, Object> reMap= new HashMap<String, Object>();
-		Map<String, Object> map = CommonUtils.getsetSessionMap();// »ñÈ¡sessionÖĞµÄtoken×Ö·û´®
+		Map<String, Object> map = CommonUtils.getsetSessionMap();// è·å–sessionä¸­çš„tokenå­—ç¬¦ä¸²
 		if (map != null) {
 			if (tokenCode.equals(map.get("tokenCode").toString())) {
 				reMap.put("message", "SUCCESS");
@@ -83,7 +83,7 @@ public class TokenUtils {
 		{
 			Token token = tokenService.findOneByCode(tokenCode);
 			if (token != null) {
-				Calendar cal = Calendar.getInstance();//»ñÈ¡µ±Ç°ÈÕÆÚ
+				Calendar cal = Calendar.getInstance();//è·å–å½“å‰æ—¥æœŸ
 				Date currentDate = cal.getTime();
 				if(currentDate.before(token.getExpiredatetime()))
 				{
@@ -93,7 +93,7 @@ public class TokenUtils {
 				else
 				{
 					/*
-					 * token¹ıÆÚ
+					 * tokenè¿‡æœŸ
 					 * */
 					reMap.put("message", "TOKENOUT");
 					reMap.put("userid", null);
@@ -102,7 +102,7 @@ public class TokenUtils {
 			else
 			{
 				/*
-				 * Êı¾İ¿âÖĞÕÒ´ò²»µ½¸Ãtoken
+				 * æ•°æ®åº“ä¸­æ‰¾æ‰“ä¸åˆ°è¯¥token
 				 * */
 				reMap.put("message", "ERRORTOKEN");
 				reMap.put("userid",null);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /*
- * Í¨ÓÃµÄ²Ù×÷½Ó¿Ú
+ * é€šç”¨çš„æ“ä½œæ¥å£
  */
 public interface IOperations<T extends Serializable> {
      

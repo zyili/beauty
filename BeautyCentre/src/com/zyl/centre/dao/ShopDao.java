@@ -77,12 +77,12 @@ public class ShopDao extends HibernateDao<Shop> implements IShopDao {
 		// TODO Auto-generated method stub
 		log.debug("getting getHotShops  with city:" + city);
 		try {
-			String sql = "SELECT s.* FROM`shop` AS s,(SELECT c.`ordcount`,s.`shopid` FROM `shopcity` AS s,`shopordcunt` AS c WHERE s.`shopid` = c.`shopid` AND s.`city` = '"
+			String sql = "SELECT s.* FROM `shop` AS s,(SELECT c.`ordcount`,s.`shopid` FROM `shopcity` AS s,`shopordcunt` AS c WHERE s.`shopid` = c.`shopid` AND s.`city` = '"
 					+ city
-					+ "' ORDER BY c.`ordcount` DESC, c.`orddate` DESC LIMIT 1) AS t WHERE s.`shopid` = t.`shopid`  ";
+					+ "' ORDER BY c.`ordcount` DESC, c.`orddate` DESC LIMIT 5) AS t WHERE s.`shopid` = t.`shopid`  ";
 			@SuppressWarnings("unchecked")
 			List<Shop> shops = (List<Shop>) getCurrentSession()
-					.createSQLQuery(sql).addEntity(Shop.class).list();
+					.createSQLQuery(sql).addEntity("s",Shop.class).list();
 			return shops;
 		} catch (RuntimeException re) {
 			log.error("get  failed", re);

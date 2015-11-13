@@ -87,9 +87,9 @@ public  class UserService extends AbstractService<User> implements IUserService 
 		Token token = new Token();
 		token.setUserid(user.getUserid());
 		token.setTokencode(tokenCode);
-		Calendar cal = Calendar.getInstance();// È¡µ±Ç°ÈÕÆÚ¡£
+		Calendar cal = Calendar.getInstance();// È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ú¡ï¿½
 		Date currentDate = cal.getTime();
-		cal.add(Calendar.DAY_OF_MONTH, +30);// È¡µ±Ç°ÈÕÆÚµÄºó30Ìì.
+		cal.add(Calendar.DAY_OF_MONTH, +30);// È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ÚµÄºï¿½30ï¿½ï¿½.
 		token.setCreatedatetime(currentDate);
 		token.setExpiredatetime(cal.getTime());
 		tokendao.createTokenCode(token);
@@ -129,7 +129,7 @@ public  class UserService extends AbstractService<User> implements IUserService 
 	public int createShopUser(User user) {
 		// TODO Auto-generated method stub
 		dao.create(user);
-		Area a=a_dao.GetByName("¹ÄÂ¥Çø","ÄÏ¾©");
+		Area a=a_dao.GetByName("é¼“æ¥¼åŒº","å—äº¬");
 		if(a==null)
 		{
 			a=a_dao.findAll().get(0);
