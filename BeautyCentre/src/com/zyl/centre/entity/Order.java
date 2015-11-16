@@ -35,6 +35,7 @@ public class Order implements java.io.Serializable {
 	private String ordphone;
 	private Integer number;
 	private Integer sumprice;
+	private Integer realprice;
 	private Integer checkuserid;
 	private String orderdec;
 	private Set<Serviceordrel> serviceordrels = new HashSet<Serviceordrel>(0);
@@ -48,7 +49,7 @@ public class Order implements java.io.Serializable {
 
 	public Order(User user, Date createtime, Date modifytime,
 			String submitusername, Integer state, String ordphone,
-			Integer number, Integer sumprice, Integer checkuserid,
+			Integer number, Integer sumprice,Integer realprice, Integer checkuserid,
 			String orderdec, Set<Serviceordrel> serviceordrels) {
 		this.user = user;
 		this.createtime = createtime;
@@ -58,6 +59,7 @@ public class Order implements java.io.Serializable {
 		this.ordphone = ordphone;
 		this.number = number;
 		this.sumprice = sumprice;
+		this.realprice=realprice;
 		this.checkuserid = checkuserid;
 		this.orderdec = orderdec;
 		this.serviceordrels = serviceordrels;
@@ -148,7 +150,16 @@ public class Order implements java.io.Serializable {
 	public void setSumprice(Integer sumprice) {
 		this.sumprice = sumprice;
 	}
+	
+	@Column(name = "realprice")
+	public Integer getRealprice() {
+		return realprice;
+	}
 
+	public void setRealprice(Integer realprice) {
+		this.realprice = realprice;
+	}
+	
 	@Column(name = "checkuserid")
 	public Integer getCheckuserid() {
 		return this.checkuserid;
@@ -175,5 +186,7 @@ public class Order implements java.io.Serializable {
 	public void setServiceordrels(Set<Serviceordrel> serviceordrels) {
 		this.serviceordrels = serviceordrels;
 	}
+
+
 
 }

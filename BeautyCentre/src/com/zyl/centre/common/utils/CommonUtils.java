@@ -157,6 +157,7 @@ public class CommonUtils {
 				json.put("username",ords.get(i).getSubmitusername());
 				json.put("ordphone", ords.get(i).getOrdphone());
 				json.put("state", ords.get(i).getState());
+				json.put("orderdec", ords.get(i).getOrderdec());
 				List<Service> sers = m_Service.GetServiceByOrdid(ords.get(i)
 						.getOrderid());
 				json.put("services", CommonUtils.serviceToJson(sers));

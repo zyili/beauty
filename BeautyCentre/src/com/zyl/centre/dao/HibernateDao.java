@@ -14,7 +14,7 @@ import com.google.common.base.Preconditions;
 import com.zyl.centre.common.utils.*;
 
 @SuppressWarnings("unchecked")
-public abstract class HibernateDao<T extends Serializable>  implements
+public abstract class HibernateDao<T extends Serializable> implements
 		IOperations<T> {
 
 	private Class<T> clazz;
@@ -33,6 +33,11 @@ public abstract class HibernateDao<T extends Serializable>  implements
 	}
 
 	protected final Session getCurrentSession() {
+		if (null == sessionFactory.getCurrentSession()) {
+			System.out.println("session为控制---------------");
+			Session session = sessionFactory.openSession();
+			return session;
+		}
 		return sessionFactory.getCurrentSession();
 	}
 

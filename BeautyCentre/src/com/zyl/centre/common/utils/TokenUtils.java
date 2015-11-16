@@ -16,7 +16,8 @@ import com.zyl.centre.service.TokenService;
 
 public class TokenUtils {
 
-	private static final char[] hexCode = "0123456789abcdefGHIJKLMN".toCharArray();
+	private static final char[] hexCode = "0123456789abcdefGHIJKLMN"
+			.toCharArray();
 
 	public static String toHexString(byte[] data) {
 		if (data == null) {
@@ -48,7 +49,7 @@ public class TokenUtils {
 		}
 	}
 
-	public static String getRandomString(int length) { 
+	public static String getRandomString(int length) {
 		String base = "abcdefghijklmnopqrstuvwxyz0123456789";
 		Random random = new Random(System.currentTimeMillis());
 		StringBuffer sb = new StringBuffer();
@@ -70,42 +71,40 @@ public class TokenUtils {
 		return false;
 	}
 
-	public static Map<String, Object> manageToken(String tokenCode) {
-		ITokenService tokenService = new TokenService();
-		Map<String, Object> reMap= new HashMap<String, Object>();
+	public static Map<String, Object> manageToken(String tokenCode,ITokenService tokenService) {
+		Map<String, Object> reMap = new HashMap<String, Object>();
 		Map<String, Object> map = CommonUtils.getsetSessionMap();// 获取session中的token字符串
 		if (map != null) {
+			System.out.println("session Map"+map);
 			if (tokenCode.equals(map.get("tokenCode").toString())) {
 				reMap.put("message", "SUCCESS");
 				reMap.put("userid", map.get("userid"));
+			}else
+			{
+				reMap.put("message", "ERRORTOKEN");
+				reMap.put("userid", null);
 			}
-		}else
-		{
-			Token token = tokenService.findOneByCode(tokenCode);
+		} else {
+			Token token = tokenService.getTokenByTokenCode(tokenCode);
 			if (token != null) {
-				Calendar cal = Calendar.getInstance();//获取当前日期
+				Calendar cal = Calendar.getInstance();// 获取当前日期
 				Date currentDate = cal.getTime();
-				if(currentDate.before(token.getExpiredatetime()))
-				{
+				if (currentDate.before(token.getExpiredatetime())) {
 					reMap.put("message", "SUCCESS");
 					reMap.put("userid", token.getUserid());
-				}
-				else
-				{
+				} else {
 					/*
 					 * token过期
-					 * */
+					 */
 					reMap.put("message", "TOKENOUT");
 					reMap.put("userid", null);
 				}
-			}
-			else
-			{
+			} else {
 				/*
 				 * 数据库中找打不到该token
-				 * */
+				 */
 				reMap.put("message", "ERRORTOKEN");
-				reMap.put("userid",null);
+				reMap.put("userid", null);
 			}
 		}
 		return reMap;

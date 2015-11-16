@@ -60,6 +60,7 @@ public class LoginAction extends ActionSupport {
 		try {
 			if (user == null || user.getUsername() == null
 					|| user.getPassword() == null) {
+				System.out.println("deses");
 				reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 			} else {
 				User getuser = userservice.findOneByPass(user.getUsername(),

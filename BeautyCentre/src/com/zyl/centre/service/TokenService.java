@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.zyl.centre.common.utils.IOperations;
 import com.zyl.centre.dao.ITokenDao;
+import com.zyl.centre.dao.TokenDao;
 import com.zyl.centre.entity.Token;
 
 @Service("tokenService")
@@ -24,14 +25,19 @@ public class TokenService extends AbstractService<Token> implements ITokenServic
 	}
 
 	@Override
-	public Token findOneByCode(String code) {
-		// TODO Auto-generated method stub
-		return dao.findOneByCode(code);
-	}
-
-	@Override
 	public void createTokenCode(Token token) {
 		// TODO Auto-generated method stub
 		dao.createTokenCode(token);
+	}
+
+	@Override
+	public Token getTokenByTokenCode(String code) {
+		return dao.getTokenByTokenCode(code);
+	}
+
+	@Override
+	public Token findOneByCode(String code) {
+		// TODO Auto-generated method stub
+		return dao.findOneByCode(code);
 	}
 }

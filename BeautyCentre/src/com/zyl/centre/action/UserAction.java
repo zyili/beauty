@@ -80,7 +80,7 @@ public class UserAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> tokenmap = TokenUtils.manageToken(token);
+		Map<String, Object> tokenmap = TokenUtils.manageToken(token,tokenService);
 
 		if (tokenmap.get("message").toString().equals("SUCCESS")) {
 			List<Order> ords = orderservice.getOrdsByUserid(Integer
@@ -137,7 +137,7 @@ public class UserAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> tokenmap = TokenUtils.manageToken(token);
+		Map<String, Object> tokenmap = TokenUtils.manageToken(token,tokenService);
 		if (tokenmap.get("message").equals("SUCCESS")) {
 			if (user.getRealname() != null) {
 				String name = URLDecoder.decode(user.getRealname(), "UTF-8");
@@ -174,7 +174,7 @@ public class UserAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
 			return;
 		}
-		Map<String, Object> tokenmap = TokenUtils.manageToken(token);
+		Map<String, Object> tokenmap = TokenUtils.manageToken(token,tokenService);
 		if (tokenmap.get("message").toString().equals("SUCCESS")) {
 			if (number < 0 || service == null || service.getServiceid() == null) {
 				rejson.put("ResultMessage", CommonUtils.PARAMERROR);

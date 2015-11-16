@@ -27,6 +27,7 @@ import com.zyl.centre.service.IImgService;
 import com.zyl.centre.service.IOrderService;
 import com.zyl.centre.service.IServiceService;
 import com.zyl.centre.service.IShopService;
+import com.zyl.centre.service.ITokenService;
 
 public class OrderAction extends ActionSupport {
 
@@ -37,6 +38,7 @@ public class OrderAction extends ActionSupport {
 	private String token;
 	private Shop shop;
 	private int number;
+	private int realprice;
 	private int optype;
 	private Order order;
 	@Resource(name = "orderService")
@@ -47,6 +49,9 @@ public class OrderAction extends ActionSupport {
 
 	@Resource(name = "serviceService")
 	private IServiceService m_Service;
+	
+	@Resource(name = "tokenService")
+	private ITokenService tokenService;
 
 	public String getToken() {
 		return token;
@@ -71,7 +76,29 @@ public class OrderAction extends ActionSupport {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
+	public int getOptype() {
+		return optype;
+	}
 
+	public void setOptype(int optype) {
+		this.optype = optype;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public int getRealprice() {
+		return realprice;
+	}
+
+	public void setRealprice(int realprice) {
+		this.realprice = realprice;
+	}
 	
 	public void getOrdersInfo() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
@@ -80,7 +107,7 @@ public class OrderAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
 			int shopid = shop.getShopid();
 			List<Order> orders = shopService.getOrdersByShopid(shopid);
@@ -140,6 +167,7 @@ public class OrderAction extends ActionSupport {
 	}
 
 	public void editOrder() throws IOException {
+		System.out.println("编辑订单");
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		if(token==null)
 		{
@@ -147,7 +175,7 @@ public class OrderAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
 			if (order.getOrderid() == null) {//id为空
 				reMap.put("ResultMessage", CommonUtils.PARAMERROR);
@@ -157,6 +185,10 @@ public class OrderAction extends ActionSupport {
 				if (getOrd != null) {//getord 不为空
 					if (optype == 1) // 订单完成
 					{
+						if(realprice!=0)
+						{
+							getOrd.setRealprice(realprice);
+						}
 						getOrd.setState(1);
 						orderservice.update(getOrd);
 						reMap.put("ResultMessage", CommonUtils.SUCCESS);
@@ -180,21 +212,5 @@ public class OrderAction extends ActionSupport {
 			}
 		}
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-	}
-
-	public int getOptype() {
-		return optype;
-	}
-
-	public void setOptype(int optype) {
-		this.optype = optype;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
 	}
 }

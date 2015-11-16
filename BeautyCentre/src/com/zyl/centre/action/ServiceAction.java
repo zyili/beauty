@@ -1,5 +1,6 @@
 package com.zyl.centre.action;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,6 +32,7 @@ import com.zyl.centre.service.IImgService;
 import com.zyl.centre.service.IProdtypeService;
 import com.zyl.centre.service.IProductService;
 import com.zyl.centre.service.IServiceService;
+import com.zyl.centre.service.ITokenService;
 
 public class ServiceAction extends ActionSupport {
 
@@ -55,6 +57,9 @@ public class ServiceAction extends ActionSupport {
 
 	@Resource(name = "imgService")
 	public IImgService imgService;
+	
+	@Resource(name = "tokenService")
+	private ITokenService tokenService;
 
 	public Shop getShop() {
 		return shop;
@@ -137,49 +142,47 @@ public class ServiceAction extends ActionSupport {
 	public void produceService() throws Exception {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		Map<String, Object> token_reMap = new HashMap<String, Object>();
-		JSONObject json = CommonUtils.getJson();
-		if (json == null) {
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
-			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-			return;
+		String root = "/usr/apache-tomcat-8.0.28/webapps/BeautyCentre";
+		StringBuffer json = new StringBuffer();
+		String line = null;
+		try {
+			BufferedReader reader = ServletActionContext.getRequest()
+					.getReader();
+			while ((line = reader.readLine()) != null) {
+				json.append(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		String root = ServletActionContext.getRequest().getRealPath(
-				"service_upload");
-		token_reMap = TokenUtils.manageToken(token);
-		if (!token_reMap.get("message").equals("SUCCESS")) {
-			CommonUtils.toJson(ServletActionContext.getResponse(), token_reMap);
-			return;
-		}
-		if (null == ServletActionContext.getRequest().getParameter("token")
-				|| null == ServletActionContext.getRequest().getParameter(
-						"files") || shop == null || service == null
-				|| product == null || productype == null) {
-
-			reMap.put("ResultMessage", CommonUtils.JSONERROR);
-			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-			return;
-		}
-		if (json == null || json.toString() == "{}") {
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
-		}
-		JSONArray ids = JSONArray.fromObject(json.get("types"));
-		if (ids == null) {
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
-			return;
-		}
-		List<Integer> prodtypeid = new ArrayList<Integer>();
-		for (int i = 0; i < ids.size(); i++) {
-			JSONObject jsonObj = ids.getJSONObject(i);
-			prodtypeid.add(jsonObj.getInt("prodtypeid"));
+		if(json.length()>0) {
+			JSONObject jsonObj = JSONObject.fromObject(json.toString());
+			System.out.println("get json"+jsonObj);
 		}
 
-		TimeString time = new TimeString();
-		m_Service.update(service);
+	//	if (json == null) {
+	//		reMap.put("ResultMessage", CommonUtils.PARAMERROR);
+	//		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+	//		return;
+	//	}
+	//	JSONArray ids = JSONArray.fromObject(json.get("types"));
+	//	if (ids == null) {
+	//		reMap.put("ResultMessage", CommonUtils.PARAMERROR);
+	//		return;
+	//	}
+	//	List<Integer> prodtypeid = new ArrayList<Integer>();
+	//	for (int i = 0; i < ids.size(); i++) {
+	//		JSONObject jsonObj = ids.getJSONObject(i);
+	//		prodtypeid.add(jsonObj.getInt("prodtypeid"));
+	//		System.out.println("####prodtypeid:"+prodtypeid.get(i));
+	//	}
+
+	/*	TimeString time = new TimeString();
+		m_Service.create(service);
 		for (int i = 0; i < files.size(); i++) {
 			InputStream is = new FileInputStream(files.get(i));
-			String filename = this.getFilesFileName().get(i)
-					+ time.getTimeString();
-			File destFile = new File(root, filename);
+			String filename = time.getTimeString()+this.getFilesFileName().get(i);
+			String url = "service_upload/" + filename;
+			File destFile = new File(root, url);
 			OutputStream os = new FileOutputStream(destFile);
 			byte[] buffer = new byte[400];
 			int length = 0;
@@ -188,7 +191,6 @@ public class ServiceAction extends ActionSupport {
 			}
 			is.close();
 			os.close();
-			String url = "service_upload" + filename;
 			Imgsrc img_temp = new Imgsrc();
 			img_temp.setUrl(url);
 			img_temp.setService(service);
@@ -204,7 +206,7 @@ public class ServiceAction extends ActionSupport {
 		reMap.put("ResultMessage", CommonUtils.SUCCESS);
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 		return;
-
+		*/
 	}
 
 	public void deleteService() throws Exception {
@@ -215,7 +217,7 @@ public class ServiceAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		token_reMap = TokenUtils.manageToken(token);
+		token_reMap = TokenUtils.manageToken(token,tokenService);
 		if (!token_reMap.get("message").equals("SUCCESS")) {
 			CommonUtils.toJson(ServletActionContext.getResponse(), token_reMap);
 			return;
@@ -236,7 +238,6 @@ public class ServiceAction extends ActionSupport {
 	public void getServsInfoByAreaType() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		JSONObject json = CommonUtils.getJson();
-		System.out.println("客户端获取到的json------------"+json);
 		if (json == null || json.toString() == "{}") {
 			List<Service> ser = m_Service.findAll();
 			reMap.put("ResultMessage", CommonUtils.SUCCESS);
@@ -284,7 +285,7 @@ public class ServiceAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
 			int shopid = shop.getShopid();
 			List<Service> services = m_Service.getServicesByShopid(shopid);
@@ -316,7 +317,7 @@ public class ServiceAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
 			List<Product> prods = m_Product.findAll();
 			List<Prodtype> prodtypes = m_ProdtypeService.findAll();

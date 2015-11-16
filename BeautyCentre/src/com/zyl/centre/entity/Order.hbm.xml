@@ -32,6 +32,9 @@
         <property name="sumprice" type="java.lang.Integer">
             <column name="sumprice" />
         </property>
+         <property name="realprice" type="java.lang.Integer">
+            <column name="realprice" />
+        </property>
         <property name="checkuserid" type="java.lang.Integer">
             <column name="checkuserid" />
         </property>
