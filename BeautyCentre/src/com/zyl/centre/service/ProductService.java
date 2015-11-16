@@ -20,5 +20,9 @@ public class ProductService extends AbstractService<Product> implements
 		// TODO Auto-generated method stub
 		return this.dao;
 	}
+	public Product findOneById(int prodid)
+	{
+		return dao.findOneById(prodid);
+	}
 
 }

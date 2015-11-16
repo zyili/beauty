@@ -17,6 +17,9 @@ public class ProductDao extends HibernateDao<Product> implements IProductDao {
 		setLog(LogFactory.getLog(ProductDao.class));
 	}
 
+
+
+
 	@Override
 	public Product findOneById(int prodid) {
 		log.debug("getting product instance id username:" + prodid);
@@ -34,5 +37,8 @@ public class ProductDao extends HibernateDao<Product> implements IProductDao {
 			throw re;
 		}
 	}
+
 	
+
+
 }

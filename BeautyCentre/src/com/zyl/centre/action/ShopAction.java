@@ -165,6 +165,12 @@ public class ShopAction extends ActionSupport {
 		String root = "/usr/apache-tomcat-8.0.28/webapps/BeautyCentre";
 		Map<String, Object> token_reMap = new HashMap<String, Object>();
 
+
+
+	
+
+		
+
 		System.out.println(shop.getShopname());
 		System.out.println(shop.getShopaddress());
 		System.out.println(shop.getShopphone());
@@ -173,7 +179,13 @@ public class ShopAction extends ActionSupport {
 		System.out.println(areaname);
 		System.out.println(cityname);
 
+
 		Shop dbshop = shopService.getByUid(userid);
+
+
+		
+		
+		
 
 		Area area_temp = areaService.GetByName(areaname, cityname);
 		System.out.println("updateShopInfo---area_temp"
@@ -185,7 +197,10 @@ public class ShopAction extends ActionSupport {
 		shopService.update(dbshop);
 		for (int i = 0; i < files.size(); i++) {
 			InputStream is = new FileInputStream(files.get(i));
-			String filename = time.getTimeString() + this.filesFileName.get(i);
+
+
+			String filename = time.getTimeString()+this.getFilesFileName().get(i);
+
 			String url = "shop_upload/" + filename;
 			File destFile = new File(root, url);
 			OutputStream os = new FileOutputStream(destFile);
@@ -207,11 +222,30 @@ public class ShopAction extends ActionSupport {
 		return;
 	}
 
+
 	public void getShopInfo() throws Exception {
 		JSONObject rejson = new JSONObject();
+
 		if (userid == null || token == null) {
 			rejson.put("ResultMessage", CommonUtils.PARAMERROR);
 			CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
+
+		Shop shop_temp = shopService.getByUid(userid);
+		if(shop_temp==null)
+		{
+		rejson.put("shopsize",0);
+		}
+		List<Shop> shops = new ArrayList<Shop>();
+		shops.add(shop_temp);
+		rejson.put("ResultMessage", CommonUtils.SUCCESS);
+		rejson.put("shop", CommonUtils.shopsToJson(shops));
+		CommonUtils.toJson(ServletActionContext.getResponse(), rejson); 
+
+		/*
+		if (token == null || userid == null) {
+			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
+			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+
 			return;
 		}
 		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
@@ -228,6 +262,7 @@ public class ShopAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
 			return;
 		}
+
 		{
 			if (maptoken.get("message").equals("TOKENOUT")) {
 				rejson.put("ResultMessage", CommonUtils.TOKENOUT);
@@ -246,6 +281,11 @@ public class ShopAction extends ActionSupport {
 		 * return; }
 		 */
 	}
+
+		
+	}
+
+
 
 	public void test() throws IOException {
 		/*
