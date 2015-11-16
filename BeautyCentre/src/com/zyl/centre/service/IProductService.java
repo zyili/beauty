@@ -5,5 +5,5 @@ import com.zyl.centre.entity.Product;
 
 
 public interface IProductService  extends IOperations<Product> {
-
+	public Product findOneById(int prodid);
 }
