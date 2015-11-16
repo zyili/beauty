@@ -3,9 +3,15 @@ package com.zyl.centre.dao;
 import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import com.zyl.centre.entity.Area;
 import com.zyl.centre.entity.Order;
+import com.zyl.centre.entity.Prodtype;
 import com.zyl.centre.entity.Service;
 import com.zyl.centre.entity.Shop;
 
@@ -87,11 +93,15 @@ public class ServiceDao extends HibernateDao<Service> implements IServiceDao {
 
 	public void UpdateTypeRel(int service_id, int product_id,
 			List<Integer> prodtypeid) {
+		Session session = null;
+	    Transaction tr = null; 
 		for (int count = 0; count < prodtypeid.size(); count++) {
 			try {
-				String sql = "insert into prodtyperel values (" + service_id
+				String sql = "insert into prodtyperel (productid, prodtypeid, serviceid) values (" + product_id
 						+ "," + prodtypeid.get(count) + "," + service_id + ")";
-				getCurrentSession().createSQLQuery(sql);
+				session = getCurrentSession();
+				session.createSQLQuery(sql).executeUpdate();
+				
 			} catch (RuntimeException re) {
 				log.error("get  failed", re);
 				throw re;
@@ -101,9 +111,12 @@ public class ServiceDao extends HibernateDao<Service> implements IServiceDao {
 
 	public void DeleteTypeRelByid(int id) {
 		try {
-			String sql = "delete from prodtyperel where serviceid='" + id + "'";
-			getCurrentSession().createQuery(sql);
-
+			String sql = "select * from prodtyperel as p where p.serviceid='" + id + "'";
+			if(!getCurrentSession().createSQLQuery(sql).list().isEmpty())
+			{
+				sql = "delete from prodtyperel where serviceid='" + id + "'";
+				getCurrentSession().createQuery(sql).list();
+			}
 		} catch (RuntimeException re) {
 			log.error("get  failed", re);
 			throw re;
