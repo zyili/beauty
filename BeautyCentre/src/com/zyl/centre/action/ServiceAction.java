@@ -24,11 +24,13 @@ import com.zyl.centre.common.utils.CommonUtils;
 import com.zyl.centre.common.utils.TimeString;
 import com.zyl.centre.common.utils.TokenUtils;
 import com.zyl.centre.entity.Imgsrc;
+import com.zyl.centre.entity.Order;
 import com.zyl.centre.entity.Prodtype;
 import com.zyl.centre.entity.Product;
 import com.zyl.centre.entity.Service;
 import com.zyl.centre.entity.Shop;
 import com.zyl.centre.service.IImgService;
+import com.zyl.centre.service.IOrderService;
 import com.zyl.centre.service.IProdtypeService;
 import com.zyl.centre.service.IProductService;
 import com.zyl.centre.service.IServiceService;
@@ -37,16 +39,12 @@ import com.zyl.centre.service.ITokenService;
 
 public class ServiceAction extends ActionSupport {
 
-	private Shop shop;
 	private Service service;
-//	private Product product;
+	// private Product product;
 	private String types;
-	private Prodtype productype;
 	private String proid;
 	private String token;
 	private String userid;
-
-
 	private List<File> files;
 	private List<String> filesFileName;
 	private List<String> filesContentType;
@@ -63,23 +61,16 @@ public class ServiceAction extends ActionSupport {
 
 	@Resource(name = "imgService")
 	public IImgService imgService;
-	
+
 	@Resource(name = "tokenService")
 	private ITokenService tokenService;
-	
+
 	@Resource(name = "shopService")
 	public IShopService shopService;
-	
-	public Shop getShop() {
-		return shop;
-	}
 
-	public void setShop(Shop shop) {
-		this.shop = shop;
-	}
+	@Resource(name = "orderService")
+	private IOrderService orderservice;
 
-	
-	
 	public String getTypes() {
 		return types;
 	}
@@ -87,8 +78,6 @@ public class ServiceAction extends ActionSupport {
 	public void setTypes(String types) {
 		this.types = types;
 	}
-
-	
 
 	public Service getService() {
 		return service;
@@ -98,15 +87,6 @@ public class ServiceAction extends ActionSupport {
 		this.service = service;
 	}
 
-	public Prodtype getProductype() {
-		return productype;
-	}
-
-	public void setProductype(Prodtype producttype) {
-		this.productype = producttype;
-	}
-
-	
 	public String getToken() {
 		return token;
 	}
@@ -118,6 +98,7 @@ public class ServiceAction extends ActionSupport {
 	public int getNumber() {
 		return number;
 	}
+
 	public String getUserid() {
 		return userid;
 	}
@@ -125,6 +106,7 @@ public class ServiceAction extends ActionSupport {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+
 	public void setNumber(int number) {
 		this.number = number;
 	}
@@ -152,7 +134,6 @@ public class ServiceAction extends ActionSupport {
 	public void setFilesContentType(List<String> filesContentType) {
 		this.filesContentType = filesContentType;
 	}
-	
 
 	public String getProid() {
 		return proid;
@@ -170,50 +151,47 @@ public class ServiceAction extends ActionSupport {
 
 	public void produceService() throws Exception {
 		Map<String, Object> reMap = new HashMap<String, Object>();
-		Map<String, Object> token_reMap = new HashMap<String, Object>();
 		String root = "/usr/apache-tomcat-8.0.28/webapps/BeautyCentre";
-
-
-
-
-
-
-		System.out.println("#####root"+root);
-		System.out.println("#####service.getServicename()"+service.getServicename());
-		System.out.println("####service.getServiceid()"+service.getServiceid());
-		System.out.println("####service.getModifyuserid()"+service.getModifyuserid());
-		System.out.println("####productid"+proid);
-		System.out.println("####service.getServicedec()"+service.getServicedec());
-		System.out.println("####types:"+types);
+		System.out.println("#####root" + root);
+		System.out.println("#####service.getServicename()"
+				+ service.getServicename());
+		System.out.println("####service.getServiceid()"
+				+ service.getServiceid());
+		System.out.println("####service.getModifyuserid()"
+				+ service.getModifyuserid());
+		System.out.println("####productid" + proid);
+		System.out.println("####service.getServicedec()"
+				+ service.getServicedec());
+		System.out.println("####types:" + types);
 		JSONArray ids = JSONArray.fromObject(types);
-		System.out.println("###json length ="+ids.size());
+		System.out.println("###json length =" + ids.size());
 		if (ids == null) {
 			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 			return;
 		}
-		
+
 		List<Integer> prodtypeid = new ArrayList<Integer>();
 		for (int i = 0; i < ids.size(); i++) {
 			JSONObject jsonObj = ids.getJSONObject(i);
 			prodtypeid.add(jsonObj.getInt("id"));
-			System.out.println("####prodtypeid:"+prodtypeid.get(i));
+			System.out.println("####prodtypeid:" + prodtypeid.get(i));
 		}
 
 		TimeString time = new TimeString();
 		Product pro = m_Product.findOneById(Integer.valueOf(proid));
-		System.out.println("####prodtypeid:"+pro.getProductid());
+		System.out.println("####prodtypeid:" + pro.getProductid());
 		service.setProduct(pro);
-		
 		Shop shop_temp = shopService.getByUid(userid);
-		System.out.println("####shopService.getByUid(userid);"+shop_temp.getShopid());
+		System.out.println("####shopService.getByUid(userid);"
+				+ shop_temp.getShopid());
 		service.setShop(shop_temp);
 		m_Service.create(service);
-		
-		System.out.println("####after insert or update service id="+service.getServiceid());
-
+		System.out.println("####after insert or update service id="
+				+ service.getServiceid());
 		for (int i = 0; i < files.size(); i++) {
 			InputStream is = new FileInputStream(files.get(i));
-			String filename = time.getTimeString()+this.getFilesFileName().get(i);
+			String filename = time.getTimeString()
+					+ this.getFilesFileName().get(i);
 			String url = "service_upload/" + filename;
 			File destFile = new File(root, url);
 			OutputStream os = new FileOutputStream(destFile);
@@ -230,18 +208,13 @@ public class ServiceAction extends ActionSupport {
 			img_temp.setImgname(filename);
 			imgService.create(img_temp);
 		}
-
-		// update table prodtyperel
 		m_Service.DeleteTypeRelByid(service.getServiceid());
-		System.out.println("####after delete="+service.getServiceid());
-
+		System.out.println("####after delete=" + service.getServiceid());
 		m_Service.UpdateTypeRel(service.getServiceid(), service.getProduct()
 				.getProductid(), prodtypeid);
-
 		reMap.put("ResultMessage", CommonUtils.SUCCESS);
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 		return;
-		
 	}
 
 	public void deleteService() throws Exception {
@@ -252,7 +225,7 @@ public class ServiceAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		token_reMap = TokenUtils.manageToken(token,tokenService);
+		token_reMap = TokenUtils.manageToken(token, tokenService);
 		if (!token_reMap.get("message").equals("SUCCESS")) {
 			CommonUtils.toJson(ServletActionContext.getResponse(), token_reMap);
 			return;
@@ -262,12 +235,15 @@ public class ServiceAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		m_Service.deleteById(service.getServiceid());
-		m_Service.DeleteTypeRelByid(service.getServiceid());
-		reMap.put("ResultMessage", CommonUtils.SUCCESS);
+		List<Order> orders = orderservice.getOrdsByServiceid(service
+				.getServiceid());
+		if (orders == null || orders.size() == 0) {
+			m_Service.deleteService(service.getServiceid());
+			reMap.put("ResultMessage", CommonUtils.SUCCESS);
+		} else {
+			reMap.put("ResultMessage","有订单订购该服务无法删除");
+		}
 		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-		return;
-
 	}
 
 	public void getServsInfoByAreaType() throws IOException {
@@ -280,13 +256,13 @@ public class ServiceAction extends ActionSupport {
 			reMap.put("servs", CommonUtils.serviceToJson(ser));
 		} else {
 			boolean falge = false;
+			JSONArray ids = JSONArray.fromObject(types);
 			String city = json.getString("cityname");
 			String area = json.getString("areaname");
 			if (city == null || area == null) {
 				falge = true;
 			}
 			Integer prodid = Integer.valueOf(json.getString("prodctid"));
-			JSONArray ids = JSONArray.fromObject(json.get("types"));// type
 			if (prodid == null || ids == null) {
 				falge = true;
 			}
@@ -316,18 +292,16 @@ public class ServiceAction extends ActionSupport {
 	public void getServsInfo() throws IOException {
 		Map<String, Object> reMap = new HashMap<String, Object>();
 
-		if (shop == null || token == null) {
-			reMap.put("ResultMessage", CommonUtils.SUCCESS);
+		if ( userid== null || token == null) {
+			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,
+				tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
-
-	
-
-			int shopid = shop.getShopid();
-			List<Service> services = m_Service.getServicesByShopid(shopid);
+			Shop shop=shopService.getByUid(userid);
+			List<Service> services = m_Service.getServicesByShopid(shop.getShopid());
 			if (services != null && !services.isEmpty()) {
 				int sum = cmSum(services.size());
 				List<Service> reServs = formatServices(number, services);
@@ -339,9 +313,8 @@ public class ServiceAction extends ActionSupport {
 				reMap.put("ResultMessage", CommonUtils.SUCCESS);
 				reMap.put("IfExist", "no");
 			}
-	
-		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-	}
+			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+		}
 	}
 
 	public void getServtype() throws IOException {
@@ -352,21 +325,17 @@ public class ServiceAction extends ActionSupport {
 			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,
+				tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
-
-		
-		
-		
-
 			List<Product> prods = m_Product.findAll();
 			List<Prodtype> prodtypes = m_ProdtypeService.findAll();
 			reMap.put("ResultMessage", CommonUtils.SUCCESS);
 			reMap.put("prods", CommonUtils.prodsToJosn(prods));
 			reMap.put("prodtypes", CommonUtils.prodtypesToJosn(prodtypes));
-		
-		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-	}
+
+			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+		}
 	}
 
 	public List<Service> formatServices(int number, List<Service> servs) {

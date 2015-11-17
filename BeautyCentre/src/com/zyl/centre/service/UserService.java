@@ -3,6 +3,7 @@ package com.zyl.centre.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -140,5 +141,11 @@ public  class UserService extends AbstractService<User> implements IUserService 
 		shop.setUser(user);
 		shop_dao.create(shop);
 		return user.getUserid();
+	}
+
+	@Override
+	public List<User> findUserByPage(int page, int pageSize) {
+		// TODO Auto-generated method stub
+		return dao.findUserByPage(page, pageSize);
 	}
 }

@@ -19,4 +19,6 @@ public interface IServiceDao extends IOperations<Service> {
 			List<Integer> prodtypeid);
 
 	public List<Service> getServicesByShopid(int shop);
+	
+	void deleteServiceById(int serviceid);
 }

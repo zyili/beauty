@@ -34,4 +34,10 @@ public class OrderService extends AbstractService<Order> implements
 		// TODO Auto-generated method stub
 		return dao.getOrdsByUserid(userid);
 	}
+
+	@Override
+	public List<Order> getOrdsByServiceid(int serid) {
+		// TODO Auto-generated method stub
+		return dao.getOrdsByServiceid(serid);
+	}
 }

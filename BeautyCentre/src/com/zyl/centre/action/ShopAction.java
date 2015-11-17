@@ -60,7 +60,7 @@ public class ShopAction extends ActionSupport {
 
 	@Resource(name = "serviceService")
 	private IServiceService m_Service;
-	
+
 	@Resource(name = "tokenService")
 	private ITokenService tokenService;
 
@@ -165,12 +165,6 @@ public class ShopAction extends ActionSupport {
 		String root = "/usr/apache-tomcat-8.0.28/webapps/BeautyCentre";
 		Map<String, Object> token_reMap = new HashMap<String, Object>();
 
-
-
-	
-
-		
-
 		System.out.println(shop.getShopname());
 		System.out.println(shop.getShopaddress());
 		System.out.println(shop.getShopphone());
@@ -179,13 +173,7 @@ public class ShopAction extends ActionSupport {
 		System.out.println(areaname);
 		System.out.println(cityname);
 
-
 		Shop dbshop = shopService.getByUid(userid);
-
-
-		
-		
-		
 
 		Area area_temp = areaService.GetByName(areaname, cityname);
 		System.out.println("updateShopInfo---area_temp"
@@ -194,12 +182,20 @@ public class ShopAction extends ActionSupport {
 		dbshop.setShopaddress(shop.getShopaddress());
 		dbshop.setShopname(shop.getShopname());
 		dbshop.setShopphone(shop.getShopphone());
+		if(dbshop.getShoplevel()==null)
+		{
+			dbshop.setShoplevel(3);
+		}
+		if(dbshop.getPerconsum()==null)
+		{
+			dbshop.setPerconsum(200);
+		}
 		shopService.update(dbshop);
 		for (int i = 0; i < files.size(); i++) {
 			InputStream is = new FileInputStream(files.get(i));
 
-
-			String filename = time.getTimeString()+this.getFilesFileName().get(i);
+			String filename = time.getTimeString()
+					+ this.getFilesFileName().get(i);
 
 			String url = "shop_upload/" + filename;
 			File destFile = new File(root, url);
@@ -222,48 +218,25 @@ public class ShopAction extends ActionSupport {
 		return;
 	}
 
-
 	public void getShopInfo() throws Exception {
 		JSONObject rejson = new JSONObject();
-
 		if (userid == null || token == null) {
 			rejson.put("ResultMessage", CommonUtils.PARAMERROR);
 			CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
-
-		Shop shop_temp = shopService.getByUid(userid);
-		if(shop_temp==null)
-		{
-		rejson.put("shopsize",0);
-		}
-		List<Shop> shops = new ArrayList<Shop>();
-		shops.add(shop_temp);
-		rejson.put("ResultMessage", CommonUtils.SUCCESS);
-		rejson.put("shop", CommonUtils.shopsToJson(shops));
-		CommonUtils.toJson(ServletActionContext.getResponse(), rejson); 
-
-		/*
-		if (token == null || userid == null) {
-			reMap.put("ResultMessage", CommonUtils.PARAMERROR);
-			CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-
 			return;
 		}
-		Map<String, Object> maptoken = TokenUtils.manageToken(token,tokenService);
+		Map<String, Object> maptoken = TokenUtils.manageToken(token,
+				tokenService);
 		if (maptoken.get("message").equals("SUCCESS")) {
 			Shop shop_temp = shopService.getByUid(userid);
-			if(shop_temp==null)
-			{
-				rejson.put("shopsize",0);
+			if (shop_temp == null) {
+				rejson.put("shopsize", 0);
 			}
 			List<Shop> shops = new ArrayList<Shop>();
 			shops.add(shop_temp);
 			rejson.put("ResultMessage", CommonUtils.SUCCESS);
 			rejson.put("shop", CommonUtils.shopsToJson(shops));
-			CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
-			return;
-		}
-
-		{
+		} else {
 			if (maptoken.get("message").equals("TOKENOUT")) {
 				rejson.put("ResultMessage", CommonUtils.TOKENOUT);
 			} else {
@@ -271,21 +244,7 @@ public class ShopAction extends ActionSupport {
 			}
 		}
 		CommonUtils.toJson(ServletActionContext.getResponse(), rejson);
-		/*
-		 * if (token == null || userid == null) { reMap.put("ResultMessage",
-		 * CommonUtils.PARAMERROR);
-		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-		 * return; } token_reMap = TokenUtils.manageToken(token); if
-		 * (!token_reMap.get("message").equals("SUCCESS")) {
-		 * CommonUtils.toJson(ServletActionContext.getResponse(), token_reMap);
-		 * return; }
-		 */
 	}
-
-		
-	}
-
-
 
 	public void test() throws IOException {
 		/*
@@ -324,20 +283,24 @@ public class ShopAction extends ActionSupport {
 		 * reMap.put("hotshops",
 		 * CommonUtils.shopsToJson(shopService.findAll()));
 		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-	    
-		User user = new User();
-		user.setUsername("sun");
-		user.setPassword("111");
-		userservice.createShopUser(user);
-		Map<String, Object> reMap = new HashMap<String, Object>();
-		reMap.put("hotshops", user.getUsername() + user.getUserid().toString());
-		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
-			 */
-		Token token=tokenService.getTokenByTokenCode("c1e7c585ffbf0de56ac612c3113ae327");
-		Map<String, Object> reMap = new HashMap<String, Object>();
-		reMap.put("code", token.getTokencode());
-		reMap.put("id", token.getUserid());
-		CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+		 * 
+		 * User user = new User(); user.setUsername("sun");
+		 * user.setPassword("111"); userservice.createShopUser(user);
+		 * Map<String, Object> reMap = new HashMap<String, Object>();
+		 * reMap.put("hotshops", user.getUsername() +
+		 * user.getUserid().toString());
+		 * CommonUtils.toJson(ServletActionContext.getResponse(), reMap);
+		 */
+		//m_Service.deleteService(2);
+		Shop dbshop = shopService.getByUid("1");
+		if(dbshop.getShoplevel()==null)
+		{
+			System.out.println("可以进入level======nulll");
+		}
+		if(dbshop.getPerconsum()==null)
+		{
+			System.out.println("可以进入Perconsum======nulll");
+		}
 	}
 
 	public void getHotShopsInfo() throws IOException {

@@ -8,4 +8,5 @@ import com.zyl.centre.entity.Order;
 public interface IOrderDao extends IOperations<Order>{
 	public Order getOrdByid(int id);
 	public List<Order> getOrdsByUserid(int userid);
+	List<Order> getOrdsByServiceid(int serid);
 }

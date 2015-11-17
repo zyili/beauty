@@ -2,9 +2,10 @@ package com.zyl.centre.dao;
 
 import java.util.List;
 
-
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
 
 
 
@@ -92,5 +93,19 @@ public class UserDao extends HibernateDao<User> implements IUserDao {
 			log.error("check  failed", re);
 			throw re;
 		}
+	}
+	/**
+	 * pageSize为每页显示的记录数 page为当前显示的页
+	 */
+	@Override
+	public List<User> findUserByPage(int page, int pageSize) {
+		// TODO Auto-generated method stub
+		Query query = getCurrentSession().createQuery(
+				"from User order by userid asc");
+		query.setMaxResults(pageSize); // 每页最多显示几条
+		query.setFirstResult((page - 1) * pageSize); // 每页从第几条记录开始
+		@SuppressWarnings("unchecked")
+		List<User> users = query.list();
+		return users;
 	}
 }

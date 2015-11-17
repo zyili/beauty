@@ -19,6 +19,8 @@ public abstract class AbstractService <T extends Serializable> implements IOpera
 
     @Override
     public List<T> findAll() {
+    	if(getDao()==null)
+    	{System.out.print("nulllllllllllllllllllllllllllll");}
         return getDao().findAll();
     }
 

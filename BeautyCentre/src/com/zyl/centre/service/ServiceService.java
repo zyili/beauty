@@ -7,13 +7,19 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.zyl.centre.common.utils.IOperations;
+import com.zyl.centre.dao.IImgsrcDao;
 import com.zyl.centre.dao.IServiceDao;
 
 @Service("serviceService")
-public class ServiceService extends AbstractService<com.zyl.centre.entity.Service> implements IServiceService {
+public class ServiceService extends
+		AbstractService<com.zyl.centre.entity.Service> implements
+		IServiceService {
 
 	@Resource(name = "serviceDao")
 	private IServiceDao dao;
+	
+	@Resource(name = "imgsrcDao")
+	private IImgsrcDao imgdao;
 
 	public ServiceService() {
 		super();
@@ -36,12 +42,13 @@ public class ServiceService extends AbstractService<com.zyl.centre.entity.Servic
 		// TODO Auto-generated method stub
 		return dao.getServByAreaType(city, area, productid, prodtypeid);
 	}
-	public void DeleteTypeRelByid(int id)
-	{
+
+	public void DeleteTypeRelByid(int id) {
 		dao.DeleteTypeRelByid(id);
 	}
-	public void UpdateTypeRel(int service_id,int product_id, List<Integer> prodtypeid)
-	{
+
+	public void UpdateTypeRel(int service_id, int product_id,
+			List<Integer> prodtypeid) {
 		dao.UpdateTypeRel(service_id, product_id, prodtypeid);
 	}
 
@@ -55,5 +62,13 @@ public class ServiceService extends AbstractService<com.zyl.centre.entity.Servic
 	public com.zyl.centre.entity.Service getServiceByid(int id) {
 		// TODO Auto-generated method stub
 		return dao.getServiceByid(id);
+	}
+
+	@Override
+	public void deleteService(int serviceid) {
+		// TODO Auto-generated method stub
+		imgdao.deleteImgByServiceid(serviceid);
+		dao.DeleteTypeRelByid(serviceid);
+		dao.deleteServiceById(serviceid);
 	}
 }

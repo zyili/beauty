@@ -43,7 +43,7 @@
 		<action name="userUpdate" class="userAction" method="userUpdate">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
-		
+
 		<action name="bookService" class="userAction" method="bookService">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
@@ -90,6 +90,32 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 
+		<!-- stage_web action -->
+		<action name="stagelogin" class="stageLogin">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">stage_management/index-Ma.jsp
+			</result>
+			<result name="error">stage_management/fail.jsp</result>
+		</action>
+		<action name="listUser" class="stageLogin" method="listUser">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">stage_management/manage/User/userMessage.jsp
+			</result>
+			<result name="error">stage_management/fail.jsp</result>
+		</action>
+		<action name="findUserMessage" class="statgeUser" method="findUserMessage">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">stage_management/manage/User/checkUserMessage.jsp
+			</result>
+			<result name="error">stage_management/fail.jsp</result>
+		</action>
+		<action name="modifyUserPass" class="statgeUser" method="modifyUserPass">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">stage_management/manage/User/userMessage.jsp
+			</result>
+			<result name="error">stage_management/fail.jsp</result>
+		</action>
 	</package>
+
 
 </struts>

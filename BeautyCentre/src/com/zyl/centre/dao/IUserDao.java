@@ -1,5 +1,7 @@
 package com.zyl.centre.dao;
 
+import java.util.List;
+
 import com.zyl.centre.common.utils.IOperations;
 import com.zyl.centre.entity.User;
 
@@ -12,4 +14,6 @@ public interface IUserDao extends IOperations<User> {
 	int GetUserIDByName(final String username, final String password);
 	
 	User findUserByUserid(int id);
+	
+	List<User> findUserByPage(int page, int pageSize);
 }

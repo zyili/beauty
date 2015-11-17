@@ -18,4 +18,6 @@ public interface IServiceService extends IOperations<Service> {
 	List<Service> getServicesByShopid(int shop);
 
 	Service getServiceByid(int id);
+	
+	void deleteService(int serviceid);
 }

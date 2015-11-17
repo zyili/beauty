@@ -34,6 +34,15 @@
 		scope="prototype">
 	</bean>
 
+	<bean name="stageLogin" class="com.zyl.centre.stage.action.stageLogin"
+		scope="prototype">
+	</bean>
+	
+	<bean name="statgeUser" class="com.zyl.centre.stage.action.statgeUser"
+		scope="prototype">
+	</bean>
+
+
 	<!-- Spring管理Struts2的Interceptor -->
 	<bean name="checkLoginInterceptor" class="com.zyl.centre.interceptor.CheckLogin"
 		scope="prototype">
@@ -70,7 +79,9 @@
 	<bean name="serviceordrelService" class="com.zyl.centre.service.ServiceordrelService"
 		scope="prototype">
 	</bean>
-
+	<bean name="menuService" class="com.zyl.centre.service.MenuService"
+		scope="prototype">
+	</bean>
 
 
 	<!-- Spring管理Struts2的Dao -->
@@ -90,5 +101,6 @@
 		scope="prototype" />
 	<bean name="shopDao" class="com.zyl.centre.dao.ShopDao" scope="prototype" />
 	<bean name="tokenDao" class="com.zyl.centre.dao.TokenDao" scope="prototype" />
+	<bean name="menuDao" class="com.zyl.centre.dao.MenuDao" scope="prototype" />
 
 </beans>

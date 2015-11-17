@@ -1,5 +1,6 @@
 package com.zyl.centre.service;
 
+import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
@@ -11,10 +12,18 @@ import com.zyl.centre.entity.User;
 public interface IUserService extends IOperations<User> {
 
 	boolean checkByName(final String username);
+
 	User findOneByPass(final String username, final String pass);
+
 	int GetUserIDByName(String username, String password);
-	void createUser(User user,String tokenCode);
+
+	void createUser(User user, String tokenCode);
+
 	User findUserByUserid(int id);
-	Order bookService(int uerid,int serviceid,int number);
+
+	Order bookService(int uerid, int serviceid, int number);
+
 	int createShopUser(User user);
+
+	List<User> findUserByPage(int page, int pageSize);
 }

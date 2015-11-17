@@ -3,6 +3,7 @@ package com.zyl.centre.dao;
 import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -94,14 +95,18 @@ public class ServiceDao extends HibernateDao<Service> implements IServiceDao {
 	public void UpdateTypeRel(int service_id, int product_id,
 			List<Integer> prodtypeid) {
 		Session session = null;
-	    Transaction tr = null; 
+		Transaction tr = null;
 		for (int count = 0; count < prodtypeid.size(); count++) {
 			try {
-				String sql = "insert into prodtyperel (productid, prodtypeid, serviceid) values (" + product_id
-						+ "," + prodtypeid.get(count) + "," + service_id + ")";
+				String sql = "insert into prodtyperel (productid, prodtypeid, serviceid) values ("
+						+ product_id
+						+ ","
+						+ prodtypeid.get(count)
+						+ ","
+						+ service_id + ")";
 				session = getCurrentSession();
 				session.createSQLQuery(sql).executeUpdate();
-				
+
 			} catch (RuntimeException re) {
 				log.error("get  failed", re);
 				throw re;
@@ -111,11 +116,12 @@ public class ServiceDao extends HibernateDao<Service> implements IServiceDao {
 
 	public void DeleteTypeRelByid(int id) {
 		try {
-			String sql = "select * from prodtyperel as p where p.serviceid='" + id + "'";
-			if(!getCurrentSession().createSQLQuery(sql).list().isEmpty())
-			{
-				sql = "delete from prodtyperel where serviceid='" + id + "'";
-				getCurrentSession().createQuery(sql).list();
+			String sql = "select * from prodtyperel as p where p.serviceid='"
+					+ id + "'";
+			if (!getCurrentSession().createSQLQuery(sql).list().isEmpty()) {
+				sql = "delete from Prodtyperel where serviceid='" + id + "'";
+				Query query = getCurrentSession().createQuery(sql);
+				query.executeUpdate();
 			}
 		} catch (RuntimeException re) {
 			log.error("get  failed", re);
@@ -137,6 +143,20 @@ public class ServiceDao extends HibernateDao<Service> implements IServiceDao {
 			return null;
 		} catch (RuntimeException re) {
 			log.error("get  failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public void deleteServiceById(int serviceid) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "delete from Service where serviceid='" + serviceid
+					+ "'";
+			Query query = getCurrentSession().createQuery(sql);
+			query.executeUpdate();
+		} catch (RuntimeException re) {
+			log.error("delete  failed", re);
 			throw re;
 		}
 	}

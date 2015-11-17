@@ -3,6 +3,7 @@ package com.zyl.centre.dao;
 import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.zyl.centre.entity.Imgsrc;
@@ -46,6 +47,32 @@ public class ImgsrcDao extends HibernateDao<Imgsrc> implements IImgsrcDao {
 				return imgs;
 			}
 			return null;
+		} catch (RuntimeException re) {
+			log.error("get  failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public void deleteImgByServiceid(int servid) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "delete from Imgsrc where serviceid='" + servid + "'";
+			Query query = getCurrentSession().createQuery(sql);
+			query.executeUpdate();
+		} catch (RuntimeException re) {
+			log.error("get  failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public void deleteImgByShopid(int shopid) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "delete from Imgsrc where shopid='" + shopid + "'";
+			Query query = getCurrentSession().createQuery(sql);
+			query.executeUpdate();
 		} catch (RuntimeException re) {
 			log.error("get  failed", re);
 			throw re;
