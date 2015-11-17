@@ -1,6 +1,6 @@
 package com.zyl.centre.entity;
 
-// Generated 2015-11-5 8:35:54 by Hibernate Tools 3.2.2.GA
+// Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,7 +80,7 @@ public class Imgsrc implements java.io.Serializable {
 		this.imgname = imgname;
 	}
 
-	@Column(name = "url", length = 32)
+	@Column(name = "url", length = 100)
 	public String getUrl() {
 		return this.url;
 	}

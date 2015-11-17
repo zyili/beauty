@@ -1,6 +1,6 @@
 package com.zyl.centre.entity;
 
-// Generated 2015-11-5 8:35:54 by Hibernate Tools 3.2.2.GA
+// Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA
 
 import java.util.Date;
 import java.util.HashSet;
@@ -49,8 +49,9 @@ public class Order implements java.io.Serializable {
 
 	public Order(User user, Date createtime, Date modifytime,
 			String submitusername, Integer state, String ordphone,
-			Integer number, Integer sumprice,Integer realprice, Integer checkuserid,
-			String orderdec, Set<Serviceordrel> serviceordrels) {
+			Integer number, Integer sumprice, Integer realprice,
+			Integer checkuserid, String orderdec,
+			Set<Serviceordrel> serviceordrels) {
 		this.user = user;
 		this.createtime = createtime;
 		this.modifytime = modifytime;
@@ -59,7 +60,7 @@ public class Order implements java.io.Serializable {
 		this.ordphone = ordphone;
 		this.number = number;
 		this.sumprice = sumprice;
-		this.realprice=realprice;
+		this.realprice = realprice;
 		this.checkuserid = checkuserid;
 		this.orderdec = orderdec;
 		this.serviceordrels = serviceordrels;
@@ -150,16 +151,16 @@ public class Order implements java.io.Serializable {
 	public void setSumprice(Integer sumprice) {
 		this.sumprice = sumprice;
 	}
-	
+
 	@Column(name = "realprice")
 	public Integer getRealprice() {
-		return realprice;
+		return this.realprice;
 	}
 
 	public void setRealprice(Integer realprice) {
 		this.realprice = realprice;
 	}
-	
+
 	@Column(name = "checkuserid")
 	public Integer getCheckuserid() {
 		return this.checkuserid;
@@ -186,7 +187,5 @@ public class Order implements java.io.Serializable {
 	public void setServiceordrels(Set<Serviceordrel> serviceordrels) {
 		this.serviceordrels = serviceordrels;
 	}
-
-
 
 }

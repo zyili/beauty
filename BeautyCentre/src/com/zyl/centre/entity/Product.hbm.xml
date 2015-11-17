@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<!-- Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA -->
 <hibernate-mapping>
     <class name="com.zyl.centre.entity.Product" table="product" catalog="beautycentre">
         <id name="productid" type="java.lang.Integer">
@@ -37,6 +37,12 @@
                 <column name="productid" />
             </key>
             <one-to-many class="com.zyl.centre.entity.Service" />
+        </set>
+        <set name="prodtypes" inverse="true">
+            <key>
+                <column name="productid" />
+            </key>
+            <one-to-many class="com.zyl.centre.entity.Prodtype" />
         </set>
     </class>
 </hibernate-mapping>

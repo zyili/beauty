@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<!-- Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA -->
 <hibernate-mapping>
     <class name="com.zyl.centre.entity.Prodtype" table="prodtype" catalog="beautycentre">
         <id name="prodtypeid" type="java.lang.Integer">
             <column name="prodtypeid" />
             <generator class="identity" />
         </id>
+        <many-to-one name="product" class="com.zyl.centre.entity.Product" fetch="select">
+            <column name="productid" />
+        </many-to-one>
         <property name="prodtypename" type="string">
             <column name="prodtypename" length="32" />
         </property>

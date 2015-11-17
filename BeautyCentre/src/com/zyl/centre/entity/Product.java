@@ -1,6 +1,6 @@
 package com.zyl.centre.entity;
 
-// Generated 2015-11-5 8:35:54 by Hibernate Tools 3.2.2.GA
+// Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA
 
 import java.util.Date;
 import java.util.HashSet;
@@ -33,13 +33,15 @@ public class Product implements java.io.Serializable {
 	private String ext3;
 	private Set<Prodtyperel> prodtyperels = new HashSet<Prodtyperel>(0);
 	private Set<Service> services = new HashSet<Service>(0);
+	private Set<Prodtype> prodtypes = new HashSet<Prodtype>(0);
 
 	public Product() {
 	}
 
 	public Product(String productname, Date createtime, String productdec,
 			String ext1, String ext2, String ext3,
-			Set<Prodtyperel> prodtyperels, Set<Service> services) {
+			Set<Prodtyperel> prodtyperels, Set<Service> services,
+			Set<Prodtype> prodtypes) {
 		this.productname = productname;
 		this.createtime = createtime;
 		this.productdec = productdec;
@@ -48,6 +50,7 @@ public class Product implements java.io.Serializable {
 		this.ext3 = ext3;
 		this.prodtyperels = prodtyperels;
 		this.services = services;
+		this.prodtypes = prodtypes;
 	}
 
 	@Id
@@ -132,6 +135,15 @@ public class Product implements java.io.Serializable {
 
 	public void setServices(Set<Service> services) {
 		this.services = services;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+	public Set<Prodtype> getProdtypes() {
+		return this.prodtypes;
+	}
+
+	public void setProdtypes(Set<Prodtype> prodtypes) {
+		this.prodtypes = prodtypes;
 	}
 
 }

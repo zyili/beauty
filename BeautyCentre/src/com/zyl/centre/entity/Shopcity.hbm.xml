@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.zyl.centre.entity.Shopcity" table="shopcity" catalog="beautycentre">
+        <composite-id name="id" class="com.zyl.centre.entity.ShopcityId">
+            <key-property name="shopid" type="int">
+                <column name="shopid" />
+            </key-property>
+            <key-property name="city" type="string">
+                <column name="city" length="20" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,6 +1,6 @@
 package com.zyl.centre.entity;
 
-// Generated 2015-11-12 21:49:27 by Hibernate Tools 3.2.2.GA
+// Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA
 
 import java.util.Date;
 import java.util.HashSet;
@@ -31,18 +31,18 @@ public class Shop implements java.io.Serializable {
 	private User user;
 	private String shopname;
 	private Integer shoptypeid;
-	private String shopphone;
-	private String shopaddress;
-	private Integer perconsum;
-	private String businesstime;
-	private Integer shoplevel;
-	private String discountmessage;
 	private Integer state;
 	private Date createtime;
 	private String shopdec;
 	private String ext1;
 	private String ext2;
 	private String ext3;
+	private String shopphone;
+	private String shopaddress;
+	private Integer perconsum;
+	private String businesstime;
+	private Integer shoplevel;
+	private String discountmessage;
 	private Set<Imgsrc> imgsrcs = new HashSet<Imgsrc>(0);
 	private Set<Service> services = new HashSet<Service>(0);
 
@@ -56,26 +56,26 @@ public class Shop implements java.io.Serializable {
 	}
 
 	public Shop(Area area, User user, String shopname, Integer shoptypeid,
-			String shopphone, String shopaddress, Integer perconsum,
-			String businesstime, Integer shoplevel, String discountmessage,
 			Integer state, Date createtime, String shopdec, String ext1,
-			String ext2, String ext3, Set<Imgsrc> imgsrcs, Set<Service> services) {
+			String ext2, String ext3, String shopphone, String shopaddress,
+			Integer perconsum, String businesstime, Integer shoplevel,
+			String discountmessage, Set<Imgsrc> imgsrcs, Set<Service> services) {
 		this.area = area;
 		this.user = user;
 		this.shopname = shopname;
 		this.shoptypeid = shoptypeid;
-		this.shopphone = shopphone;
-		this.shopaddress = shopaddress;
-		this.perconsum = perconsum;
-		this.businesstime = businesstime;
-		this.shoplevel = shoplevel;
-		this.discountmessage = discountmessage;
 		this.state = state;
 		this.createtime = createtime;
 		this.shopdec = shopdec;
 		this.ext1 = ext1;
 		this.ext2 = ext2;
 		this.ext3 = ext3;
+		this.shopphone = shopphone;
+		this.shopaddress = shopaddress;
+		this.perconsum = perconsum;
+		this.businesstime = businesstime;
+		this.shoplevel = shoplevel;
+		this.discountmessage = discountmessage;
 		this.imgsrcs = imgsrcs;
 		this.services = services;
 	}
@@ -127,60 +127,6 @@ public class Shop implements java.io.Serializable {
 
 	public void setShoptypeid(Integer shoptypeid) {
 		this.shoptypeid = shoptypeid;
-	}
-
-	@Column(name = "shopphone", length = 25)
-	public String getShopphone() {
-		return this.shopphone;
-	}
-
-	public void setShopphone(String shopphone) {
-		this.shopphone = shopphone;
-	}
-
-	@Column(name = "shopaddress", length = 100)
-	public String getShopaddress() {
-		return this.shopaddress;
-	}
-
-	public void setShopaddress(String shopaddress) {
-		this.shopaddress = shopaddress;
-	}
-
-	@Column(name = "perconsum")
-	public Integer getPerconsum() {
-		return this.perconsum;
-	}
-
-	public void setPerconsum(Integer perconsum) {
-		this.perconsum = perconsum;
-	}
-
-	@Column(name = "businesstime", length = 50)
-	public String getBusinesstime() {
-		return this.businesstime;
-	}
-
-	public void setBusinesstime(String businesstime) {
-		this.businesstime = businesstime;
-	}
-
-	@Column(name = "shoplevel")
-	public Integer getShoplevel() {
-		return this.shoplevel;
-	}
-
-	public void setShoplevel(Integer shoplevel) {
-		this.shoplevel = shoplevel;
-	}
-
-	@Column(name = "discountmessage", length = 100)
-	public String getDiscountmessage() {
-		return this.discountmessage;
-	}
-
-	public void setDiscountmessage(String discountmessage) {
-		this.discountmessage = discountmessage;
 	}
 
 	@Column(name = "state")
@@ -236,6 +182,60 @@ public class Shop implements java.io.Serializable {
 
 	public void setExt3(String ext3) {
 		this.ext3 = ext3;
+	}
+
+	@Column(name = "shopphone", length = 25)
+	public String getShopphone() {
+		return this.shopphone;
+	}
+
+	public void setShopphone(String shopphone) {
+		this.shopphone = shopphone;
+	}
+
+	@Column(name = "shopaddress", length = 100)
+	public String getShopaddress() {
+		return this.shopaddress;
+	}
+
+	public void setShopaddress(String shopaddress) {
+		this.shopaddress = shopaddress;
+	}
+
+	@Column(name = "perconsum")
+	public Integer getPerconsum() {
+		return this.perconsum;
+	}
+
+	public void setPerconsum(Integer perconsum) {
+		this.perconsum = perconsum;
+	}
+
+	@Column(name = "businesstime", length = 50)
+	public String getBusinesstime() {
+		return this.businesstime;
+	}
+
+	public void setBusinesstime(String businesstime) {
+		this.businesstime = businesstime;
+	}
+
+	@Column(name = "shoplevel")
+	public Integer getShoplevel() {
+		return this.shoplevel;
+	}
+
+	public void setShoplevel(Integer shoplevel) {
+		this.shoplevel = shoplevel;
+	}
+
+	@Column(name = "discountmessage", length = 100)
+	public String getDiscountmessage() {
+		return this.discountmessage;
+	}
+
+	public void setDiscountmessage(String discountmessage) {
+		this.discountmessage = discountmessage;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "shop")

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-11-5 8:35:55 by Hibernate Tools 3.2.2.GA -->
+<!-- Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA -->
 <hibernate-mapping>
     <class name="com.zyl.centre.entity.Order" table="order" catalog="beautycentre">
         <id name="orderid" type="java.lang.Integer">
@@ -32,7 +32,7 @@
         <property name="sumprice" type="java.lang.Integer">
             <column name="sumprice" />
         </property>
-         <property name="realprice" type="java.lang.Integer">
+        <property name="realprice" type="java.lang.Integer">
             <column name="realprice" />
         </property>
         <property name="checkuserid" type="java.lang.Integer">

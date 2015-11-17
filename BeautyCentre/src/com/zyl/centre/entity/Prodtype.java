@@ -1,6 +1,6 @@
 package com.zyl.centre.entity;
 
-// Generated 2015-11-5 8:35:54 by Hibernate Tools 3.2.2.GA
+// Generated 2015-11-17 16:17:44 by Hibernate Tools 3.2.2.GA
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +24,7 @@ import javax.persistence.Table;
 public class Prodtype implements java.io.Serializable {
 
 	private Integer prodtypeid;
+	private Product product;
 	private String prodtypename;
 	private String prodtypedec;
 	private String ext1;
@@ -31,8 +34,9 @@ public class Prodtype implements java.io.Serializable {
 	public Prodtype() {
 	}
 
-	public Prodtype(String prodtypename, String prodtypedec, String ext1,
-			String ext2, Set<Prodtyperel> prodtyperels) {
+	public Prodtype(Product product, String prodtypename, String prodtypedec,
+			String ext1, String ext2, Set<Prodtyperel> prodtyperels) {
+		this.product = product;
 		this.prodtypename = prodtypename;
 		this.prodtypedec = prodtypedec;
 		this.ext1 = ext1;
@@ -49,6 +53,16 @@ public class Prodtype implements java.io.Serializable {
 
 	public void setProdtypeid(Integer prodtypeid) {
 		this.prodtypeid = prodtypeid;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "productid")
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Column(name = "prodtypename", length = 32)
